@@ -21,6 +21,7 @@ dependencies:
     git:
       url: https://github.com/ViktorKirjanov/calendar_timeline
       ref: master # branch
+  flutter_slidable: ^3.0.0
 
 
 dev_dependencies:
