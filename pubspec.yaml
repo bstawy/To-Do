@@ -17,6 +17,10 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  calendar_timeline:
+    git:
+      url: https://github.com/ViktorKirjanov/calendar_timeline
+      ref: master # branch
 
 
 dev_dependencies:
