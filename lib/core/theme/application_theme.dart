@@ -24,8 +24,9 @@ class ApplicationTheme {
       ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
       type: BottomNavigationBarType.fixed,
-      elevation: 10,
+      elevation: 0,
       selectedIconTheme: IconThemeData(
         color: primaryColor,
       ),
@@ -37,13 +38,7 @@ class ApplicationTheme {
       showSelectedLabels: false,
       showUnselectedLabels: false,
     ),
-    cardTheme: CardTheme(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-      ),
-      shadowColor: Colors.grey.shade300,
-    ),
+
     textTheme: TextTheme(
       titleLarge: const TextStyle(
         color: Colors.white,
@@ -76,8 +71,13 @@ class ApplicationTheme {
         fontWeight: FontWeight.normal,
       ),
     ),
+
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Colors.white,
-    )
+    ),
+
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: primaryColor,
+    ),
   );
 }

@@ -21,28 +21,47 @@ class _HomeLayoutState extends State<HomeLayout> {
     var theme = Theme.of(context);
 
     return Scaffold(
+      extendBody: true,
+      floatingActionButton: CircleAvatar(
+        backgroundColor: Colors.white,
+        radius: 32,
+        child: FloatingActionButton(
+          onPressed: () {},
+          elevation: 0,
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+            size: 28,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: pages[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/list_icon.png'),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8,
+        child: BottomNavigationBar(
+          currentIndex: selectedIndex,
+          onTap: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage('assets/images/list_icon.png'),
+              ),
+              label: 'Tasks',
             ),
-            label: 'Tasks',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/settings_icon.png'),
+            BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage('assets/images/settings_icon.png'),
+              ),
+              label: 'Tasks',
             ),
-            label: 'Tasks',
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
