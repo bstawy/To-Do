@@ -1,16 +1,128 @@
-# todo
+# To Do
+*"To Do" is a versatile mobile application designed to help users organize their daily schedules and tasks for an entire year.*
 
-A new Flutter project.
+*With an intuitive and user-friendly interface, this app allows you to seamlessly plan your day, add multiple tasks.*
 
-## Getting Started
+*Furthermore, "To Do" offers a Dark mode option for a comfortable user experience.*
 
-This project is a starting point for a Flutter application.
+*This app was developed using the Flutter Framework and employs the "Provider" package for effective management of the application's state.*
 
-A few resources to get you started if this is your first Flutter project:
+&nbsp;
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Languages and Technologies
+![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
+![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
+
+![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white)
+![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
+
+&nbsp;
+
+## GETTING INTO THE PROJECT:
+To Do application supports Dark mode.
+
+**It contains 2 main pages:**
+
+&nbsp; &nbsp; &nbsp; 1. Home.
+
+&nbsp; &nbsp; &nbsp; 2. Settings.
+
+&nbsp;
+
+**Home page:**
+
+&nbsp; &nbsp; &nbsp; Here you can select a day to see it's tasks or to add new one.
+
+&nbsp;
+
+<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/QuranTab.gif" width="300" /> -->
+
+&nbsp;
+
+
+&nbsp;
+
+&nbsp; &nbsp; &nbsp; Adding a new task.
+
+&nbsp;
+
+<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+
+&nbsp;
+
+
+&nbsp;
+
+&nbsp; &nbsp; &nbsp; Edit existing task
+
+&nbsp;
+
+<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+
+&nbsp;
+
+
+&nbsp;
+
+&nbsp; &nbsp; &nbsp; Remove task 
+
+&nbsp;
+
+<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+
+&nbsp;
+
+
+&nbsp;
+
+&nbsp; &nbsp; &nbsp; Or mark as complete
+
+&nbsp;
+
+<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+
+&nbsp;
+
+
+&nbsp;
+
+**Settings page:**
+
+&nbsp; &nbsp; &nbsp; You can change application language and theme from here.
+
+&nbsp;
+
+<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+
+&nbsp;
+
+
+&nbsp;
+
+**Light & Dark modes:**
+
+&nbsp; &nbsp; &nbsp; You cah use application in both light and dark modes.
+
+&nbsp;
+
+<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+
+&nbsp;
+
+
+&nbsp;
+<!-- 
+**Multi language:**
+
+&nbsp; &nbsp; &nbsp; Application supports English and Arabic languages but only in tabs. Sura verses and hadeth content are in Arabic language.
+
+&nbsp;
+-->
+<img src="https://github.com/bstawy/Islami/blob/master/screenshots/ArabicLanguage.gif" width="300" />
+<!-- ![image](screenshots/QuranTab.gif =250x250) -->
+
+&nbsp;
