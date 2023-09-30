@@ -122,7 +122,7 @@ To Do application supports Dark mode.
 
 &nbsp;
 -->
-<img src="https://github.com/bstawy/Islami/blob/master/screenshots/ArabicLanguage.gif" width="300" />
+<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/ArabicLanguage.gif" width="300" /> -->
 <!-- ![image](screenshots/QuranTab.gif =250x250) -->
 
 &nbsp;
