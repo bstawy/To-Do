@@ -25,14 +25,13 @@ class ApplicationTheme {
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
+      elevation: 10,
       selectedIconTheme: IconThemeData(
         color: primaryColor,
-        size: 25,
       ),
       selectedItemColor: primaryColor,
       unselectedIconTheme: IconThemeData(
         color: Colors.grey.shade700,
-        size: 25,
       ),
       unselectedItemColor: Colors.grey.shade700,
       showSelectedLabels: false,
@@ -77,5 +76,8 @@ class ApplicationTheme {
         fontWeight: FontWeight.normal,
       ),
     ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Colors.white,
+    )
   );
 }
