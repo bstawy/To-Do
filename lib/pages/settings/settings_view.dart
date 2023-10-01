@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo/pages/settings/widgets/language_bottom_sheet.dart';
 import 'package:todo/pages/settings/widgets/settings_item.dart';
 import 'package:todo/pages/settings/widgets/theme_bottom_sheet.dart';
+import '../../core/provider/app_provider.dart';
 
 class SettingsView extends StatefulWidget {
-  static bool isLanguageBottomSheetVisible = false;
-  static bool isThemeBottomSheetVisible = false;
-
   const SettingsView({super.key});
 
   @override
@@ -20,6 +19,7 @@ class _SettingsViewState extends State<SettingsView> {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
+    var appProvider = Provider.of<AppProvider>(context);
 
     return Column(
       children: [
@@ -41,12 +41,9 @@ class _SettingsViewState extends State<SettingsView> {
           settingOptionTitle: 'language',
           selectedOption: 'English',
           onClicked: () {
-            if(SettingsView.isThemeBottomSheetVisible) {
-              SettingsView.isThemeBottomSheetVisible = false;
+            if(!appProvider.isLanguageBottomSheetVisible) {
+              appProvider.changeLanguageSheetStatus('open');
             }
-            setState(() {
-              SettingsView.isLanguageBottomSheetVisible = true;
-            });
           },
         ),
         const SizedBox(height: 40),
@@ -54,58 +51,38 @@ class _SettingsViewState extends State<SettingsView> {
           settingOptionTitle: 'Theme',
           selectedOption: 'Light',
           onClicked: () {
-            if(SettingsView.isLanguageBottomSheetVisible) {
-              SettingsView.isLanguageBottomSheetVisible = false;
+            if(!appProvider.isThemeBottomSheetVisible) {
+              appProvider.changeThemeSheetStatus('open');
             }
-            setState(() {
-              SettingsView.isThemeBottomSheetVisible = true;
-            });
           },
         ),
         Visibility(
-          visible: SettingsView.isLanguageBottomSheetVisible,
+          visible: appProvider.isLanguageBottomSheetVisible,
           child: Expanded(
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(15),
               ),
-              child: LanguageBottomSheetWidget(),
+              child: const LanguageBottomSheetWidget(),
             ),
           ),
         ),
         Visibility(
-          visible: SettingsView.isThemeBottomSheetVisible,
+          visible: appProvider.isThemeBottomSheetVisible,
           child: Expanded(
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(15),
               ),
-              child: ThemeBottomSheetWidget(),
+              child: const ThemeBottomSheetWidget(),
             ),
           ),
         ),
       ],
-    );
-  }
-
-  void showLanguageBottomSheet(context) {
-
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => const LanguageBottomSheetWidget(),
-    );
-  }
-
-  void showThemeBottomSheet(context) {
-    var theme = Theme.of(context);
-
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => const ThemeBottomSheetWidget(),
     );
   }
 }

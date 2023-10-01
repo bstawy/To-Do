@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/core/provider/app_provider.dart';
 import 'package:todo/core/theme/application_theme.dart';
 import 'package:todo/layout/home_layout.dart';
 import 'package:todo/pages/splash_view/splash_view.dart';
 
 void main() {
-  runApp(const MyApplication());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AppProvider(),
+      child: const MyApplication(),
+    ),
+  );
 }
 
 class MyApplication extends StatelessWidget {

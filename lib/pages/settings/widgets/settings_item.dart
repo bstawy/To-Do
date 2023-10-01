@@ -53,7 +53,7 @@ class SettingsItem extends StatelessWidget {
                   style: theme.textTheme.bodyLarge!
                       .copyWith(color: Colors.black,/*theme.colorScheme.primary*/),
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_drop_down_outlined,
                   color: Colors.black/*theme.colorScheme.primary*/,
                 ),
