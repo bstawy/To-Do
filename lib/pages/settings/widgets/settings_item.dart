@@ -40,6 +40,10 @@ class SettingsItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: theme.colorScheme.primary.withOpacity(0.3),
+                width: 2,
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,11 +51,11 @@ class SettingsItem extends StatelessWidget {
                 Text(
                   selectedOption,
                   style: theme.textTheme.bodyLarge!
-                      .copyWith(color: theme.colorScheme.primary),
+                      .copyWith(color: Colors.black,/*theme.colorScheme.primary*/),
                 ),
                 Icon(
                   Icons.arrow_drop_down_outlined,
-                  color: theme.colorScheme.primary,
+                  color: Colors.black/*theme.colorScheme.primary*/,
                 ),
               ],
             ),

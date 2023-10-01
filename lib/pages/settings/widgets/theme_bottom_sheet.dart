@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../settings_view.dart';
 import 'selected_option_widget.dart';
 import 'unselected_option_widget.dart';
 
@@ -13,7 +14,6 @@ class ThemeBottomSheetWidget extends StatefulWidget {
 class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: 350,
       child: Column(
@@ -22,7 +22,9 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
           GestureDetector(
             onTap: () {
               //appProvider.changeLanguage('en');
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              SettingsView.isThemeBottomSheetVisible = false;
+              setState(() {});
             },
             child: const SelectedOption(
               selectedOptionTitle: 'Light',
@@ -31,7 +33,9 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
           GestureDetector(
             onTap: () {
               //appProvider.changeLanguage('ar');
-              Navigator.pop(context);
+              // Navigator.pop(context);
+              SettingsView.isThemeBottomSheetVisible = false;
+              setState(() {});
             },
             child: const UnselectedOption(
               unselectedOptionTitle: 'Dark',

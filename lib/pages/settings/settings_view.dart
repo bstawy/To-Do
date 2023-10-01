@@ -3,8 +3,18 @@ import 'package:todo/pages/settings/widgets/language_bottom_sheet.dart';
 import 'package:todo/pages/settings/widgets/settings_item.dart';
 import 'package:todo/pages/settings/widgets/theme_bottom_sheet.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends StatefulWidget {
+  static bool isLanguageBottomSheetVisible = false;
+  static bool isThemeBottomSheetVisible = false;
+
   const SettingsView({super.key});
+
+  @override
+  State<SettingsView> createState() => _SettingsViewState();
+}
+
+class _SettingsViewState extends State<SettingsView> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +41,12 @@ class SettingsView extends StatelessWidget {
           settingOptionTitle: 'language',
           selectedOption: 'English',
           onClicked: () {
-            showLanguageBottomSheet(context);
+            if(SettingsView.isThemeBottomSheetVisible) {
+              SettingsView.isThemeBottomSheetVisible = false;
+            }
+            setState(() {
+              SettingsView.isLanguageBottomSheetVisible = true;
+            });
           },
         ),
         const SizedBox(height: 40),
@@ -39,14 +54,45 @@ class SettingsView extends StatelessWidget {
           settingOptionTitle: 'Theme',
           selectedOption: 'Light',
           onClicked: () {
-            showLanguageBottomSheet(context);
+            if(SettingsView.isLanguageBottomSheetVisible) {
+              SettingsView.isLanguageBottomSheetVisible = false;
+            }
+            setState(() {
+              SettingsView.isThemeBottomSheetVisible = true;
+            });
           },
+        ),
+        Visibility(
+          visible: SettingsView.isLanguageBottomSheetVisible,
+          child: Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: LanguageBottomSheetWidget(),
+            ),
+          ),
+        ),
+        Visibility(
+          visible: SettingsView.isThemeBottomSheetVisible,
+          child: Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: ThemeBottomSheetWidget(),
+            ),
+          ),
         ),
       ],
     );
   }
+
   void showLanguageBottomSheet(context) {
-    var theme = Theme.of(context);
 
     showModalBottomSheet(
       context: context,
