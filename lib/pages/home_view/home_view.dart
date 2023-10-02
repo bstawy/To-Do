@@ -43,12 +43,12 @@ class HomeView extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 65,
         ),
         Expanded(
           child: ListView.builder(
-            itemBuilder: (context, index) => TaskItem(),
+            itemBuilder: (context, index) => const TaskItem(),
             itemCount: 20,
 
           ),
