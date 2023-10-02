@@ -49,8 +49,7 @@ class HomeView extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             itemBuilder: (context, index) => const TaskItem(),
-            itemCount: 20,
-
+            itemCount: 10,
           ),
         )
       ],
