@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo/core/provider/app_provider.dart';
 import 'package:todo/core/theme/application_theme.dart';
 import 'package:todo/layout/home_layout.dart';
+import 'package:todo/pages/home_view/edit_task.dart';
 import 'package:todo/pages/splash_view/splash_view.dart';
 
 void main() {
@@ -28,6 +29,7 @@ class MyApplication extends StatelessWidget {
       routes: {
         SplashView.routeName: (context) => const SplashView(),
         HomeLayout.routeName: (context) => const HomeLayout(),
+        EditTask.routeName: (context) => const EditTask(),
       },
     );
   }

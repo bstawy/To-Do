@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:todo/pages/home_view/edit_task.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key});
@@ -12,24 +13,26 @@ class TaskItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 33, vertical: 10),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [
             Colors.teal,
             Color(0xffEC4B4B),
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
-          stops: const [0.5, 0.5],
+          stops: [0.5, 0.5],
         ),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Slidable(
         startActionPane: ActionPane(
-          motion: ScrollMotion(),
+          motion: const ScrollMotion(),
           extentRatio: 0.25,
           children: [
             SlidableAction(
-              onPressed: (context) {},
+              onPressed: (context) {
+                Navigator.pushNamed(context, EditTask.routeName);
+              },
               backgroundColor: Colors.teal,
               foregroundColor: Colors.white,
               borderRadius: BorderRadius.circular(15),
@@ -39,12 +42,12 @@ class TaskItem extends StatelessWidget {
           ],
         ),
         endActionPane: ActionPane(
-          motion: ScrollMotion(),
+          motion: const ScrollMotion(),
           extentRatio: 0.25,
           children: [
             SlidableAction(
               onPressed: (context) {},
-              backgroundColor: Color(0xffEC4B4B),
+              backgroundColor: const Color(0xffEC4B4B),
               foregroundColor: Colors.white,
               borderRadius: BorderRadius.circular(15),
               icon: Icons.delete,
