@@ -39,8 +39,7 @@ class HomeView extends StatelessWidget {
               activeDayColor: theme.colorScheme.primary,
               activeBackgroundDayColor: Colors.white,
               dotsColor: Colors.white,
-              selectableDayPredicate: (date) => date.day != 23,
-            )
+            ),
           ],
         ),
         const SizedBox(
