@@ -16,7 +16,7 @@ class _AddNewTaskState extends State<AddNewTask> {
     var theme = Theme.of(context);
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height / 2.7,
+      height: MediaQuery.of(context).size.height / 2.3,
       padding: const EdgeInsets.symmetric(horizontal: 44, vertical: 22),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -28,7 +28,7 @@ class _AddNewTaskState extends State<AddNewTask> {
             'Add new Task',
             style: theme.textTheme.titleMedium,
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 15),
           TextFormField(
             controller: taskNameController,
             decoration: InputDecoration(
@@ -37,7 +37,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                     theme.textTheme.bodyLarge!.copyWith(color: Colors.grey)),
             style: theme.textTheme.bodyLarge,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 35),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -47,7 +47,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                   .copyWith(fontWeight: FontWeight.normal),
             ),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           GestureDetector(
             onTap: () => selectTime(),
             child: Text(
