@@ -14,8 +14,9 @@ class UnselectedOption extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       height: 50,
       width: double.infinity,
+      alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.05),
+        color: Colors.white24,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(

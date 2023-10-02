@@ -60,9 +60,9 @@ class _SettingsViewState extends State<SettingsView> {
           visible: appProvider.isLanguageBottomSheetVisible,
           child: Expanded(
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20,top: 75),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: theme.colorScheme.primary,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: const LanguageBottomSheetWidget(),
@@ -73,9 +73,9 @@ class _SettingsViewState extends State<SettingsView> {
           visible: appProvider.isThemeBottomSheetVisible,
           child: Expanded(
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20,top: 75),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: theme.colorScheme.primary,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: const ThemeBottomSheetWidget(),
