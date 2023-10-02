@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppProvider extends ChangeNotifier {
   bool isLanguageBottomSheetVisible = false;
   bool isThemeBottomSheetVisible = false;
-
+  bool isTaskAdderVisible = false;
   changeLanguageSheetStatus(String status) {
     if (status == 'open') {
       isLanguageBottomSheetVisible = true;
@@ -21,6 +21,16 @@ class AppProvider extends ChangeNotifier {
     } else {
       isThemeBottomSheetVisible = false;
     }
+    notifyListeners();
+  }
+
+  addNewTask() {
+    isTaskAdderVisible = true;
+    notifyListeners();
+  }
+
+  createNewTask() {
+    isTaskAdderVisible = false;
     notifyListeners();
   }
 }

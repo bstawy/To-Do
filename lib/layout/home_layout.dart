@@ -1,7 +1,10 @@
-import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/layout/widgets/add_new_task.dart';
 import 'package:todo/pages/home_view/home_view.dart';
 import 'package:todo/pages/settings/settings_view.dart';
+
+import '../core/provider/app_provider.dart';
 
 class HomeLayout extends StatefulWidget {
   static const String routeName = 'home-layout-view';
@@ -19,6 +22,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
+    var appProvider = Provider.of<AppProvider>(context);
 
     return Scaffold(
       extendBody: true,
@@ -26,17 +30,32 @@ class _HomeLayoutState extends State<HomeLayout> {
         backgroundColor: Colors.white,
         radius: 32,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            if (appProvider.isTaskAdderVisible) {
+              appProvider.createNewTask();
+            } else {
+              appProvider.addNewTask();
+            }
+          },
           elevation: 0,
-          child: const Icon(
-            Icons.add,
+          child: Icon(
+            (appProvider.isTaskAdderVisible) ? Icons.check_rounded : Icons.add,
             color: Colors.white,
             size: 28,
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: pages[selectedIndex],
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          pages[selectedIndex],
+          Visibility(
+            visible: appProvider.isTaskAdderVisible,
+            child: const AddNewTask(),
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
