@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/layout/widgets/add_new_task.dart';
+import 'package:todo/layout/widgets/new_task_bottom_sheet.dart';
 import 'package:todo/pages/home_view/home_view.dart';
 import 'package:todo/pages/settings/settings_view.dart';
 
@@ -31,31 +31,22 @@ class _HomeLayoutState extends State<HomeLayout> {
         radius: 32,
         child: FloatingActionButton(
           onPressed: () {
-            if (appProvider.isTaskAdderVisible) {
-              appProvider.createNewTask();
-            } else {
-              appProvider.addNewTask();
-            }
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => const NewTaskBottomSheet(),
+            );
+            setState(() {});
           },
           elevation: 0,
-          child: Icon(
-            (appProvider.isTaskAdderVisible) ? Icons.check_rounded : Icons.add,
+          child: const Icon(
+            Icons.add,
             color: Colors.white,
             size: 28,
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          pages[selectedIndex],
-          Visibility(
-            visible: appProvider.isTaskAdderVisible,
-            child: const AddNewTask(),
-          ),
-        ],
-      ),
+      body: pages[selectedIndex],
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
