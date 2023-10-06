@@ -10,18 +10,20 @@ class UnselectedOption extends StatelessWidget {
     var theme = Theme.of(context);
 
     return Container(
-      margin: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       height: 50,
       width: double.infinity,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: Colors.white24,
+        color: theme.colorScheme.primary.withOpacity(0.2),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
         unselectedOptionTitle,
-        style: theme.textTheme.bodyLarge,
+        style: theme.textTheme.bodyLarge!.copyWith(
+          color: Colors.black87,
+        )
       ),
     );
   }
