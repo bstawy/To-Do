@@ -9,12 +9,12 @@ class SelectedOption extends StatelessWidget {
     var theme = Theme.of(context);
 
     return Container(
-      margin: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(horizontal: 10),
       height: 50,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: Colors.white70,
+        color: theme.colorScheme.primary.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: Colors.black87,
@@ -25,7 +25,9 @@ class SelectedOption extends StatelessWidget {
         children: [
           Text(
             selectedOptionTitle,
-            style: theme.textTheme.bodyLarge,
+            style: theme.textTheme.bodyLarge!.copyWith(
+              color: Colors.black87,
+            )
           ),
           const Icon(Icons.check),
         ],
