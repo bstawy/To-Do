@@ -19,30 +19,40 @@ class _LanguageBottomSheetWidgetState extends State<LanguageBottomSheetWidget> {
   Widget build(BuildContext context) {
     var appProvider = Provider.of<AppProvider>(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        GestureDetector(
-          onTap: () {
-            //appProvider.changeLanguage('en');
-            //Navigator.pop(context);
-            appProvider.changeLanguageSheetStatus('close');
-          },
-          child: const SelectedOption(
-            selectedOptionTitle: 'English',
-          ),
+    return Container(
+      height: 350,
+      padding: const EdgeInsets.all(20),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
-        GestureDetector(
-          onTap: () {
-            //appProvider.changeLanguage('ar');
-            // Navigator.pop(context);
-            appProvider.changeLanguageSheetStatus('close');
-          },
-          child: const UnselectedOption(
-            unselectedOptionTitle: 'Arabic',
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            onTap: () {
+              //appProvider.changeLanguage('en');
+              Navigator.pop(context);
+            },
+            child: const SelectedOption(
+              selectedOptionTitle: 'English',
+            ),
           ),
-        ),
-      ],
+          SizedBox(height: 20),
+          GestureDetector(
+            onTap: () {
+              //appProvider.changeLanguage('ar');
+              Navigator.pop(context);
+            },
+            child: const UnselectedOption(
+              unselectedOptionTitle: 'Arabic',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

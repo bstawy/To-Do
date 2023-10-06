@@ -13,8 +13,6 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
-
-
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
@@ -41,9 +39,7 @@ class _SettingsViewState extends State<SettingsView> {
           settingOptionTitle: 'language',
           selectedOption: 'English',
           onClicked: () {
-            if(!appProvider.isLanguageBottomSheetVisible) {
-              appProvider.changeLanguageSheetStatus('open');
-            }
+            showLanguageBottomSheet(context);
           },
         ),
         const SizedBox(height: 40),
@@ -51,38 +47,24 @@ class _SettingsViewState extends State<SettingsView> {
           settingOptionTitle: 'Theme',
           selectedOption: 'Light',
           onClicked: () {
-            if(!appProvider.isThemeBottomSheetVisible) {
-              appProvider.changeThemeSheetStatus('open');
-            }
+            showThemeBottomSheet(context);
           },
         ),
-        Visibility(
-          visible: appProvider.isLanguageBottomSheetVisible,
-          child: Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(left: 20, right: 20,top: 75),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: const LanguageBottomSheetWidget(),
-            ),
-          ),
-        ),
-        Visibility(
-          visible: appProvider.isThemeBottomSheetVisible,
-          child: Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(left: 20, right: 20,top: 75),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: const ThemeBottomSheetWidget(),
-            ),
-          ),
-        ),
       ],
+    );
+  }
+
+  void showLanguageBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => const LanguageBottomSheetWidget(),
+    );
+  }
+
+  void showThemeBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => const ThemeBottomSheetWidget(),
     );
   }
 }
