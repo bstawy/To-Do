@@ -16,14 +16,12 @@ class UnselectedOption extends StatelessWidget {
       width: double.infinity,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: theme.colorScheme.primary.withOpacity(0.2),
+        color: theme.colorScheme.primary.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
         unselectedOptionTitle,
-        style: theme.textTheme.bodyLarge!.copyWith(
-          color: Colors.black87,
-        )
+        style: theme.textTheme.bodyLarge,
       ),
     );
   }

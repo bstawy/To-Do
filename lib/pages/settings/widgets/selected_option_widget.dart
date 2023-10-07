@@ -14,10 +14,10 @@ class SelectedOption extends StatelessWidget {
       height: 50,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: theme.colorScheme.primary.withOpacity(0.5),
+        color: theme.colorScheme.primary,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Colors.black87,
+          color: theme.colorScheme.onSecondary,
         ),
       ),
       child: Row(
@@ -25,11 +25,12 @@ class SelectedOption extends StatelessWidget {
         children: [
           Text(
             selectedOptionTitle,
-            style: theme.textTheme.bodyLarge!.copyWith(
-              color: Colors.black87,
-            )
+            style: theme.textTheme.bodyLarge,
           ),
-          const Icon(Icons.check),
+          Icon(
+            Icons.check,
+            color: theme.colorScheme.onSecondary,
+          ),
         ],
       ),
     );

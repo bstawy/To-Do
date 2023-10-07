@@ -58,51 +58,71 @@ class TaskItem extends StatelessWidget {
         child: Container(
           width: mediaQuery.width,
           height: 115,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: theme.colorScheme.secondary,
             borderRadius: BorderRadius.circular(15),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 width: 5,
+                margin: EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.primary,
+                  color: theme.primaryColor,
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
+              const SizedBox(width: 15),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Play basket ball',
-                    style: theme.textTheme.titleSmall!
-                        .copyWith(color: theme.colorScheme.primary),
+                    style: theme.textTheme.titleMedium,
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 5),
                   Row(
                     children: [
-                      const Icon(Icons.alarm),
+                      Text(
+                        'Description',
+                        style: theme.textTheme.bodyMedium!
+                            .copyWith(color: theme.colorScheme.onSecondary),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 5),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.alarm,
+                        color: theme.colorScheme.onSecondary.withOpacity(0.5),
+                        size: 20,
+                      ),
                       Text(
                         '10:30 AM',
-                        style: theme.textTheme.bodyMedium,
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                          color: theme.colorScheme.onSecondary.withOpacity(0.5),
+                        ),
                       ),
                     ],
                   ),
                 ],
               ),
-              Container(
-                width: 70,
-                height: 35,
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.primary,
-                  borderRadius: BorderRadius.circular(10),
+              const SizedBox(width: 30),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: 70,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    color: theme.primaryColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Image.asset('assets/images/check_icon.png'),
                 ),
-                child: Image.asset('assets/images/check_icon.png'),
               ),
             ],
           ),

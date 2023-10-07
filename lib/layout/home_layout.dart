@@ -20,14 +20,13 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var appProvider = Provider.of<AppProvider>(context);
 
     return Scaffold(
       extendBody: true,
       floatingActionButton: CircleAvatar(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.colorScheme.secondary,
         radius: 32,
         child: FloatingActionButton(
           onPressed: () {

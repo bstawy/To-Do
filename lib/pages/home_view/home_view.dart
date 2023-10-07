@@ -30,16 +30,16 @@ class HomeView extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: theme.colorScheme.secondary.withOpacity(0.3),
                 gradient: LinearGradient(
                   colors: [
-                    Colors.black,
-                    theme.colorScheme.secondary,
+                    theme.colorScheme.secondary.withOpacity(0.3),
+                    theme.colorScheme.primary,
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(15),
               ),
               child: CalendarTimeline(
                 initialDate: DateTime.now(),
@@ -48,10 +48,9 @@ class HomeView extends StatelessWidget {
                 onDateSelected: (date) => print(date),
                 leftMargin: 20,
                 monthColor: theme.colorScheme.secondary,
-                dayColor: Colors.teal[100],
-                activeDayColor: theme.colorScheme.primary,
-                activeBackgroundDayColor: Colors.white,
-                dotsColor: Colors.white,
+                dayColor: Colors.teal[200],
+                activeDayColor: theme.primaryColor,
+                dotsColor: theme.colorScheme.secondary,
               ),
             ),
           ],
@@ -61,12 +60,11 @@ class HomeView extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemBuilder: (context, index) => const TaskItem(),
-            itemCount: 10,
-            padding: const EdgeInsets.only(
-              top: 0,
-            )
-          ),
+              itemBuilder: (context, index) => const TaskItem(),
+              itemCount: 10,
+              padding: const EdgeInsets.only(
+                top: 0,
+              )),
         )
       ],
     );

@@ -26,24 +26,24 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
         children: [
           GestureDetector(
             onTap: () {
-              //appProvider.changeLanguage('en');
+              appProvider.changeTheme(ThemeMode.dark);
               Navigator.pop(context);
               //appProvider.changeThemeSheetStatus('close');
             },
-            child: const SelectedOption(
-              selectedOptionTitle: 'Light',
-            ),
+            child: appProvider.isDarkMode()
+                ? const SelectedOption(selectedOptionTitle: 'Dark')
+                : const UnselectedOption(unselectedOptionTitle: 'Dark'),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           GestureDetector(
             onTap: () {
-              //appProvider.changeLanguage('ar');
+              appProvider.changeTheme(ThemeMode.light);
               Navigator.pop(context);
               //appProvider.changeThemeSheetStatus('close');
             },
-            child: const UnselectedOption(
-              unselectedOptionTitle: 'Dark',
-            ),
+            child: appProvider.isDarkMode()
+                ? const UnselectedOption(unselectedOptionTitle: 'Light')
+                : const SelectedOption(selectedOptionTitle: 'Light'),
           ),
         ],
       ),

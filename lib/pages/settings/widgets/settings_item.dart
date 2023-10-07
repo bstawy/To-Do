@@ -23,8 +23,7 @@ class SettingsItem extends StatelessWidget {
           padding: const EdgeInsets.only(left: 38),
           child: Text(
             settingOptionTitle,
-            style: theme.textTheme.titleSmall!
-                .copyWith(color: const Color(0xff303030)),
+            style: theme.textTheme.titleMedium,
           ),
         ),
         GestureDetector(
@@ -38,11 +37,11 @@ class SettingsItem extends StatelessWidget {
             height: 50,
             width: mediaQuery.width,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: theme.colorScheme.secondary,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: theme.colorScheme.primary.withOpacity(0.3),
-                width: 2,
+                color: theme.primaryColor,
+                width: 1,
               ),
             ),
             child: Row(
@@ -50,12 +49,11 @@ class SettingsItem extends StatelessWidget {
               children: [
                 Text(
                   selectedOption,
-                  style: theme.textTheme.bodyLarge!
-                      .copyWith(color: Colors.black,/*theme.colorScheme.primary*/),
+                  style: theme.textTheme.bodyLarge,
                 ),
-                const Icon(
+                Icon(
                   Icons.arrow_drop_down_outlined,
-                  color: Colors.black/*theme.colorScheme.primary*/,
+                  color: theme.colorScheme.onSecondary,/*theme.colorScheme.primary*/
                 ),
               ],
             ),
