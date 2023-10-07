@@ -30,11 +30,11 @@ class HomeView extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: theme.colorScheme.secondary.withOpacity(0.3),
                 gradient: LinearGradient(
                   colors: [
-                    Colors.black,
-                    theme.colorScheme.secondary,
+                    theme.colorScheme.secondary.withOpacity(0.3),
+                    theme.colorScheme.primary,
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -50,7 +50,6 @@ class HomeView extends StatelessWidget {
                 monthColor: theme.colorScheme.secondary,
                 dayColor: Colors.teal[200],
                 activeDayColor: theme.primaryColor,
-                activeBackgroundDayColor: theme.colorScheme.secondary,
                 dotsColor: theme.colorScheme.secondary,
               ),
             ),
