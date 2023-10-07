@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/core/provider/app_provider.dart';
 import 'package:todo/core/theme/application_theme.dart';
 import 'package:todo/layout/home_layout.dart';
@@ -8,9 +9,10 @@ import 'package:todo/pages/splash_view/splash_view.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-    runApp(
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(
     ChangeNotifierProvider(
-      create: (context) => AppProvider()..getInitValuesSF(),
+      create: (context) => AppProvider(prefs),
       child: const MyApplication(),
     ),
   );
@@ -26,11 +28,9 @@ class MyApplication extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'To Do',
-
       themeMode: appProvider.currentTheme,
       theme: ApplicationTheme.lightTheme,
       darkTheme: ApplicationTheme.darkTheme,
-
       initialRoute: SplashView.routeName,
       routes: {
         SplashView.routeName: (context) => const SplashView(),
