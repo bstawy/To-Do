@@ -16,6 +16,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
+
     Timer(
       const Duration(seconds: 1),
       () => Navigator.pushReplacementNamed(context, HomeLayout.routeName),
@@ -26,6 +27,6 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     var appProvider = Provider.of<AppProvider>(context);
 
-    return Image.asset(appProvider.SplashScreen());
+    return Image.asset(appProvider.splashScreen());
   }
 }
