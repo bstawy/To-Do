@@ -146,6 +146,10 @@ class ApplicationTheme {
     bottomSheetTheme: const BottomSheetThemeData(
       backgroundColor: Color(0xff141922),
       showDragHandle: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15), topRight: Radius.circular(15)),
+      ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: primaryColor,

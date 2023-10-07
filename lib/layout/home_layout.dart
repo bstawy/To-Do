@@ -31,8 +31,10 @@ class _HomeLayoutState extends State<HomeLayout> {
         child: FloatingActionButton(
           onPressed: () {
             showModalBottomSheet(
+              isScrollControlled: true,
+              constraints: BoxConstraints.loose(const Size.fromHeight(700)),
               context: context,
-              builder: (context) => const NewTaskBottomSheet(),
+              builder: (context) => const SingleChildScrollView(child: NewTaskBottomSheet()),
             );
             setState(() {});
           },
@@ -49,6 +51,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 8,
+        color: theme.colorScheme.secondary.withAlpha(255),
         child: BottomNavigationBar(
           currentIndex: selectedIndex,
           onTap: (index) {

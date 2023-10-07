@@ -10,7 +10,6 @@ import 'package:todo/pages/splash_view/splash_view.dart';
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
-
   runApp(
     ChangeNotifierProvider(
       create: (context) => AppProvider(prefs),
@@ -29,11 +28,9 @@ class MyApplication extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'To Do',
-
       themeMode: appProvider.currentTheme,
       theme: ApplicationTheme.lightTheme,
       darkTheme: ApplicationTheme.darkTheme,
-
       initialRoute: SplashView.routeName,
       routes: {
         SplashView.routeName: (context) => const SplashView(),
