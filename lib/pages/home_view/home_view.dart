@@ -60,12 +60,14 @@ class HomeView extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-              itemBuilder: (context, index) => const TaskItem(),
-              itemCount: 10,
-              padding: const EdgeInsets.only(
-                top: 0,
-              )),
-        )
+            itemBuilder: (context, index) => const TaskItem(),
+            itemCount: 10,
+            padding: const EdgeInsets.only(
+              top: 0,
+              bottom: 90,
+            ),
+          ),
+        ),
       ],
     );
   }
