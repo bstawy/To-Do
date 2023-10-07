@@ -39,7 +39,7 @@ class HomeView extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(15),
               ),
               child: CalendarTimeline(
                 initialDate: DateTime.now(),
@@ -48,10 +48,10 @@ class HomeView extends StatelessWidget {
                 onDateSelected: (date) => print(date),
                 leftMargin: 20,
                 monthColor: theme.colorScheme.secondary,
-                dayColor: Colors.teal[100],
-                activeDayColor: theme.colorScheme.primary,
-                activeBackgroundDayColor: Colors.white,
-                dotsColor: Colors.white,
+                dayColor: Colors.teal[200],
+                activeDayColor: theme.primaryColor,
+                activeBackgroundDayColor: theme.colorScheme.secondary,
+                dotsColor: theme.colorScheme.secondary,
               ),
             ),
           ],
@@ -61,12 +61,11 @@ class HomeView extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemBuilder: (context, index) => const TaskItem(),
-            itemCount: 10,
-            padding: const EdgeInsets.only(
-              top: 0,
-            )
-          ),
+              itemBuilder: (context, index) => const TaskItem(),
+              itemCount: 10,
+              padding: const EdgeInsets.only(
+                top: 0,
+              )),
         )
       ],
     );

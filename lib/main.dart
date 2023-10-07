@@ -20,11 +20,16 @@ class MyApplication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var appProvider = Provider.of<AppProvider>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'To Do',
-      themeMode: ThemeMode.light,
+
+      themeMode: appProvider.currentTheme,
       theme: ApplicationTheme.lightTheme,
+      darkTheme: ApplicationTheme.darkTheme,
+
       initialRoute: SplashView.routeName,
       routes: {
         SplashView.routeName: (context) => const SplashView(),

@@ -18,17 +18,12 @@ class _LanguageBottomSheetWidgetState extends State<LanguageBottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
     var appProvider = Provider.of<AppProvider>(context);
+    var theme = Theme.of(context);
 
     return Container(
       height: 350,
       padding: const EdgeInsets.all(20),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20),
-          topRight: Radius.circular(20),
-        ),
-      ),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

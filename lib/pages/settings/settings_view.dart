@@ -45,7 +45,7 @@ class _SettingsViewState extends State<SettingsView> {
         const SizedBox(height: 40),
         SettingsItem(
           settingOptionTitle: 'Theme',
-          selectedOption: 'Light',
+          selectedOption: appProvider.isDarkMode() ? 'Dark' : 'Light',
           onClicked: () {
             showThemeBottomSheet(context);
           },
