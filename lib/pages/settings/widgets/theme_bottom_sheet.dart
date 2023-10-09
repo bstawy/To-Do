@@ -31,8 +31,8 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
               //appProvider.changeThemeSheetStatus('close');
             },
             child: appProvider.isDarkMode()
-                ? const SelectedOption(selectedOptionTitle: 'Dark')
-                : const UnselectedOption(unselectedOptionTitle: 'Dark'),
+                ? const UnselectedOption(unselectedOptionTitle: 'Light')
+                : const SelectedOption(selectedOptionTitle: 'Light'),
           ),
           const SizedBox(height: 20),
           GestureDetector(
@@ -42,8 +42,8 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
               //appProvider.changeThemeSheetStatus('close');
             },
             child: appProvider.isDarkMode()
-                ? const UnselectedOption(unselectedOptionTitle: 'Light')
-                : const SelectedOption(selectedOptionTitle: 'Light'),
+                ? const SelectedOption(selectedOptionTitle: 'Dark')
+                : const UnselectedOption(unselectedOptionTitle: 'Dark')
           ),
         ],
       ),
