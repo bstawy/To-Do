@@ -7,7 +7,8 @@ class ApplicationTheme {
     primaryColor: primaryColor,
     colorScheme: ColorScheme.fromSeed(
       seedColor: primaryColor,
-      primary: const Color(0xffDFECDB),
+      primary: primaryColor,
+      background: const Color(0xffDFECDB),
       secondary: const Color(0xffffffff),
       onPrimary: primaryColor,
       onSecondary: const Color(0xff000000),
@@ -84,7 +85,8 @@ class ApplicationTheme {
     primaryColor: const Color(0xff5D9CEC),
     colorScheme: ColorScheme.fromSeed(
       seedColor: const Color(0xff5D9CEC),
-      primary: const Color(0xff060E1E),
+      primary: const Color(0xff5D9CEC),
+      background: const Color(0xff060E1E),
       secondary: const Color(0xff141922),
       onPrimary: const Color(0xffffffff),
       onSecondary: const Color(0xffffffff),

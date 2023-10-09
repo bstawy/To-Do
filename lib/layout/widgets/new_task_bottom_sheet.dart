@@ -97,7 +97,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                 padding: const EdgeInsets.all(5),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withOpacity(0.5),
+                  color: theme.colorScheme.background.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -117,7 +117,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                 padding: const EdgeInsets.all(5),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: theme.colorScheme.primary.withOpacity(0.5),
+                  color: theme.colorScheme.background.withOpacity(0.5),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(

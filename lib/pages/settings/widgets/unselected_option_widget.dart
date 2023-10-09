@@ -16,7 +16,7 @@ class UnselectedOption extends StatelessWidget {
       width: double.infinity,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: theme.colorScheme.primary.withOpacity(0.5),
+        color: theme.colorScheme.background.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(

@@ -34,7 +34,7 @@ class HomeView extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     theme.colorScheme.secondary.withOpacity(0.3),
-                    theme.colorScheme.primary,
+                    theme.colorScheme.background,
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,

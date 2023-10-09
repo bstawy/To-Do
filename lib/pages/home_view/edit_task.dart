@@ -107,7 +107,7 @@ class _EditTaskState extends State<EditTask> {
                           padding: const EdgeInsets.symmetric(vertical: 5),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary,
+                            color: theme.colorScheme.background,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -128,7 +128,7 @@ class _EditTaskState extends State<EditTask> {
                           padding: const EdgeInsets.symmetric(vertical: 5),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.primary,
+                            color: theme.colorScheme.background,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
