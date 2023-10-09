@@ -50,6 +50,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
             ),
             const SizedBox(height: 10),
             Form(
+              key: formKey,
               child: Column(
                 children: [
                   CustomTextFormField(
