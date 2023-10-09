@@ -6,10 +6,15 @@ import 'package:todo/core/theme/application_theme.dart';
 import 'package:todo/layout/home_layout.dart';
 import 'package:todo/pages/home_view/edit_task.dart';
 import 'package:todo/pages/splash_view/splash_view.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     ChangeNotifierProvider(
       create: (context) => AppProvider(prefs),
