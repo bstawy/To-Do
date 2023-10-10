@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo/core/network_layer/firestore_utils.dart';
+import 'package:todo/core/utils/extract_date.dart';
+import 'package:todo/core/utils/extract_time.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
+import 'package:todo/model/task_model.dart';
 
 class NewTaskBottomSheet extends StatefulWidget {
   const NewTaskBottomSheet({super.key});
@@ -9,22 +13,22 @@ class NewTaskBottomSheet extends StatefulWidget {
 }
 
 class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
-  late TextEditingController taskNameController;
+  late TextEditingController taskTitleController;
   late TextEditingController taskDescriptionController;
   var formKey = GlobalKey<FormState>();
-  DateTime? taskSelectedDate = DateTime.now();
-  TimeOfDay? taskSelectedTime = TimeOfDay.now();
+  DateTime taskSelectedDate = DateTime.now();
+  TimeOfDay taskSelectedTime = TimeOfDay.now();
 
   @override
   void initState() {
-    taskNameController = TextEditingController();
+    taskTitleController = TextEditingController();
     taskDescriptionController = TextEditingController();
     super.initState();
   }
 
   @override
   void dispose() {
-    taskNameController.dispose();
+    taskTitleController.dispose();
     taskDescriptionController.dispose();
     super.dispose();
   }
@@ -34,7 +38,8 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
     var theme = Theme.of(context);
 
     return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Container(
         padding: const EdgeInsets.only(left: 30, right: 30, bottom: 20),
         child: Column(
@@ -55,11 +60,11 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                 children: [
                   CustomTextFormField(
                     title: 'Enter title',
-                    textEditingController: taskNameController,
+                    textEditingController: taskTitleController,
                     validator: (String? value) {
-                      if(value == null || value.isEmpty) {
+                      if (value == null || value.isEmpty) {
                         return 'You must provide task title';
-                      } else if(value.length < 10) {
+                      } else if (value.length < 10) {
                         return 'Task title must be at least 10 characters';
                       } else {
                         return null;
@@ -72,9 +77,10 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                     textEditingController: taskDescriptionController,
                     maxLines: 4,
                     validator: (String? value) {
-                      if(taskDescriptionController.text == null || taskDescriptionController.text.trim().isEmpty) {
+                      if (taskDescriptionController.text == null ||
+                          taskDescriptionController.text.trim().isEmpty) {
                         return 'You must provide description';
-                      } else if(taskDescriptionController.text.length > 100) {
+                      } else if (taskDescriptionController.text.length > 100) {
                         return 'Description must not be more than 100 characters';
                       } else {
                         return null;
@@ -121,7 +127,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  taskSelectedTime!.format(context),
+                  taskSelectedTime.format(context),
                   style: TextStyle(color: theme.colorScheme.onSecondary),
                 ),
               ),
@@ -129,8 +135,18 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
             const SizedBox(height: 35),
             Center(
               child: MaterialButton(
-                onPressed: () {
-                  if(formKey.currentState!.validate()) {
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    var task = TaskModel(
+                      title: taskTitleController.text,
+                      description: taskDescriptionController.text,
+                      date: taskSelectedDate,
+                      time: ExtractTime.formatTimeToDate(taskSelectedTime),
+                      isDone: false,
+                    );
+
+                    await FirestoreUtils.addDataToFirestore(task);
+
                     Navigator.pop(context);
                   } else {
                     print(formKey.currentState!.validate().toString());
@@ -151,20 +167,27 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
   }
 
   pickDate() async {
-    taskSelectedDate = await showDatePicker(
+    var dateSelected = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
     );
-    setState(() {});
+    if (dateSelected != null) {
+      taskSelectedDate = dateSelected;
+      setState(() {});
+    }
   }
 
   pickTime() async {
-    taskSelectedTime = await showTimePicker(
+    var timeSelected = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
     );
-    setState(() {});
+
+    if(timeSelected != null) {
+      taskSelectedTime = timeSelected;
+      setState(() {});
+    }
   }
 }

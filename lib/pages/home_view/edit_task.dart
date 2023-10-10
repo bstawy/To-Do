@@ -3,10 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
 
 import '../../core/provider/app_provider.dart';
+import '../../model/task_model.dart';
 
 class EditTask extends StatefulWidget {
   static const String routeName = 'edit-task';
-  const EditTask({super.key});
+  late TaskModel? task;
+  EditTask({super.key});
 
   @override
   State<EditTask> createState() => _EditTaskState();
@@ -22,7 +24,9 @@ class _EditTaskState extends State<EditTask> {
   @override
   void initState() {
     taskTitleController = TextEditingController();
+    taskTitleController.text = widget.task!.title;
     taskDescriptionController = TextEditingController();
+    taskDescriptionController.text = widget.task!.description;
     super.initState();
   }
 

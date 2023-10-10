@@ -40,7 +40,7 @@ class MyApplication extends StatelessWidget {
       routes: {
         SplashView.routeName: (context) => const SplashView(),
         HomeLayout.routeName: (context) => const HomeLayout(),
-        EditTask.routeName: (context) => const EditTask(),
+        EditTask.routeName: (context) => EditTask(),
       },
     );
   }
