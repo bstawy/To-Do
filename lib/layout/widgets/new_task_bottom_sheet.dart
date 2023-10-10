@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo/core/network_layer/firestore_utils.dart';
 import 'package:todo/core/utils/extract_date.dart';
 import 'package:todo/core/utils/extract_time.dart';
@@ -17,7 +18,13 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
   late TextEditingController taskDescriptionController;
   var formKey = GlobalKey<FormState>();
   DateTime taskSelectedDate = DateTime.now();
-  TimeOfDay taskSelectedTime = TimeOfDay.now();
+  DateTime taskSelectedTime = DateTime(
+    0,
+    0,
+    0,
+    DateTime.now().hour,
+    DateTime.now().minute,
+  );
 
   @override
   void initState() {
@@ -107,9 +114,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  taskSelectedDate
-                      .toString()
-                      .substring(0, taskSelectedDate.toString().indexOf(' ')),
+                  DateFormat.yMMMd().format(taskSelectedDate),
                 ),
               ),
             ),
@@ -127,7 +132,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  taskSelectedTime.format(context),
+                  TimeOfDay(hour: taskSelectedTime.hour, minute: taskSelectedTime.minute).format(context),
                   style: TextStyle(color: theme.colorScheme.onSecondary),
                 ),
               ),
@@ -141,7 +146,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                       title: taskTitleController.text,
                       description: taskDescriptionController.text,
                       date: taskSelectedDate,
-                      time: ExtractTime.formatTimeToDate(taskSelectedTime),
+                      time: taskSelectedTime,
                       isDone: false,
                     );
 
@@ -185,8 +190,14 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
       initialTime: TimeOfDay.now(),
     );
 
-    if(timeSelected != null) {
-      taskSelectedTime = timeSelected;
+    if (timeSelected != null) {
+      taskSelectedTime = DateTime(
+        0,
+        0,
+        0,
+        timeSelected.hour,
+        timeSelected.minute,
+      );
       setState(() {});
     }
   }

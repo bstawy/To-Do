@@ -16,7 +16,7 @@ class HomeLayout extends StatefulWidget {
 
 class _HomeLayoutState extends State<HomeLayout> {
   int selectedIndex = 0;
-  List<Widget> pages = [HomeView(), const SettingsView()];
+  List<Widget> pages = const [HomeView(), SettingsView()];
 
   @override
   Widget build(BuildContext context) {

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
 
+import '../../core/network_layer/firestore_utils.dart';
 import '../../core/provider/app_provider.dart';
 import '../../model/task_model.dart';
 
 class EditTask extends StatefulWidget {
   static const String routeName = 'edit-task';
-  late TaskModel? task;
-  EditTask({super.key});
+  const EditTask({super.key});
 
   @override
   State<EditTask> createState() => _EditTaskState();
@@ -18,15 +18,13 @@ class _EditTaskState extends State<EditTask> {
   var formKey = GlobalKey<FormState>();
   late TextEditingController taskTitleController;
   late TextEditingController taskDescriptionController;
-  DateTime? taskSelectedDate = DateTime.now();
-  TimeOfDay? taskSelectedTime = TimeOfDay.now();
+  DateTime taskSelectedDate = DateTime.now();
+  TimeOfDay taskSelectedTime = TimeOfDay.now();
 
   @override
   void initState() {
     taskTitleController = TextEditingController();
-    taskTitleController.text = widget.task!.title;
     taskDescriptionController = TextEditingController();
-    taskDescriptionController.text = widget.task!.description;
     super.initState();
   }
 
@@ -39,6 +37,10 @@ class _EditTaskState extends State<EditTask> {
 
   @override
   Widget build(BuildContext context) {
+    var args = ModalRoute.of(context)?.settings.arguments as TaskModel;
+    taskTitleController.text = args.title;
+    taskDescriptionController.text = args.description;
+    taskSelectedDate = args.date;
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var appProvider = Provider.of<AppProvider>(context);
@@ -94,12 +96,32 @@ class _EditTaskState extends State<EditTask> {
                       CustomTextFormField(
                         title: 'Title',
                         textEditingController: taskTitleController,
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'You must provide task title';
+                          } else if (value.length < 10) {
+                            return 'Task title must be at least 10 characters';
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                       const SizedBox(height: 35),
                       CustomTextFormField(
                         title: 'Description',
                         textEditingController: taskDescriptionController,
                         maxLines: 4,
+                        validator: (String? value) {
+                          if (taskDescriptionController.text == null ||
+                              taskDescriptionController.text.trim().isEmpty) {
+                            return 'You must provide description';
+                          } else if (taskDescriptionController.text.length >
+                              100) {
+                            return 'Description must not be more than 100 characters';
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
                       const SizedBox(height: 50),
                       Text('Date', style: theme.textTheme.bodyLarge),
@@ -145,8 +167,24 @@ class _EditTaskState extends State<EditTask> {
                       const SizedBox(height: 75),
                       Center(
                         child: MaterialButton(
-                          onPressed: () {
-                            Navigator.pop(context);
+                          onPressed: () async {
+                            if (formKey.currentState!.validate()) {
+                              /*
+                              var task = TaskModel(
+                                title: taskTitleController.text,
+                                description: taskDescriptionController.text,
+                                date: taskSelectedDate,
+                                time: taskSelectedDate,
+                                isDone: false,
+                              );
+
+                              await FirestoreUtils.addDataToFirestore(task);
+*/
+                              Navigator.pop(context);
+                            } else {
+                              print(
+                                  formKey.currentState!.validate().toString());
+                            }
                           },
                           color: theme.primaryColor,
                           padding: const EdgeInsets.symmetric(
@@ -169,20 +207,27 @@ class _EditTaskState extends State<EditTask> {
   }
 
   pickDate() async {
-    taskSelectedDate = await showDatePicker(
+    var selectedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
     );
-    setState(() {});
+
+    if (selectedDate != null) {
+      taskSelectedDate = selectedDate;
+      setState(() {});
+    }
   }
 
   pickTime() async {
-    taskSelectedTime = await showTimePicker(
+    var selectedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
     );
-    setState(() {});
+    if (selectedTime != null) {
+      taskSelectedTime = selectedTime;
+      setState(() {});
+    }
   }
 }

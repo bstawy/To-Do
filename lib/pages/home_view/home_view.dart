@@ -7,9 +7,14 @@ import 'package:todo/pages/home_view/widgets/task_item.dart';
 
 import '../../model/task_model.dart';
 
-class HomeView extends StatelessWidget {
-  HomeView({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   DateTime selectedDate = DateTime.now();
 
   @override
@@ -49,11 +54,15 @@ class HomeView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: CalendarTimeline(
-                initialDate: DateTime.now(),
+                initialDate: selectedDate,
                 firstDate: DateTime.now(),
                 lastDate: DateTime(2024, 12, 31),
                 onDateSelected: (date) {
-                  selectedDate = ExtractDate.extractDate(date);
+                  if(selectedDate != date) {
+                    setState(() {
+                      selectedDate = date;
+                    });
+                  }
                 },
                 leftMargin: 20,
                 monthColor: theme.colorScheme.secondary,
@@ -94,6 +103,7 @@ class HomeView extends StatelessWidget {
 
               var tasksList =
                   snapshot.data?.docs.map((element) => element.data()).toList() ?? [];
+
               return ListView.builder(
                 itemBuilder: (context, index) =>
                     TaskItem(task: tasksList[index]),

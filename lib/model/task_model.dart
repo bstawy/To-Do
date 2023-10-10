@@ -23,8 +23,8 @@ class TaskModel {
       'id': id,
       'title': title,
       'description': description,
-      'date': ExtractDate.extractDate(date).millisecondsSinceEpoch,
-      'time': time.millisecondsSinceEpoch,
+      'date': (ExtractDate.extractDate(date)).millisecondsSinceEpoch,
+      'time': (ExtractDate.extractDate(time)).millisecondsSinceEpoch,
       'isDone': isDone,
     };
   }
@@ -35,7 +35,7 @@ class TaskModel {
       title: json['title'],
       description: json['description'],
       date: ExtractDate.extractDate(DateTime.fromMillisecondsSinceEpoch(json['date'])),
-      time: DateTime.fromMillisecondsSinceEpoch(json['time']),
+      time: ExtractDate.extractDate(DateTime.fromMillisecondsSinceEpoch(json['time'])),
       isDone: json['isDone'],
     );
   }

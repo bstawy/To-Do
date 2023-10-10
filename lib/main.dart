@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,7 +42,7 @@ class MyApplication extends StatelessWidget {
       routes: {
         SplashView.routeName: (context) => const SplashView(),
         HomeLayout.routeName: (context) => const HomeLayout(),
-        EditTask.routeName: (context) => EditTask(),
+        EditTask.routeName: (context) => const EditTask(),
       },
     );
   }
