@@ -19,12 +19,19 @@ class _EditTaskState extends State<EditTask> {
   late TextEditingController taskTitleController;
   late TextEditingController taskDescriptionController;
   DateTime taskSelectedDate = DateTime.now();
-  TimeOfDay taskSelectedTime = TimeOfDay.now();
+  late DateTime taskSelectedTime;
 
   @override
   void initState() {
     taskTitleController = TextEditingController();
     taskDescriptionController = TextEditingController();
+    taskSelectedTime = DateTime(
+      taskSelectedDate.year,
+      taskSelectedDate.month,
+      taskSelectedDate.day,
+      TimeOfDay.now().hour,
+      TimeOfDay.now().minute,
+    );
     super.initState();
   }
 
@@ -41,6 +48,7 @@ class _EditTaskState extends State<EditTask> {
     taskTitleController.text = args.title;
     taskDescriptionController.text = args.description;
     taskSelectedDate = args.date;
+    taskSelectedTime = args.time;
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var appProvider = Provider.of<AppProvider>(context);
@@ -158,7 +166,10 @@ class _EditTaskState extends State<EditTask> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            taskSelectedTime!.format(context),
+                            TimeOfDay(
+                                    hour: taskSelectedTime.hour,
+                                    minute: taskSelectedTime.minute)
+                                .format(context),
                             style:
                                 TextStyle(color: theme.colorScheme.onSecondary),
                           ),
@@ -223,10 +234,16 @@ class _EditTaskState extends State<EditTask> {
   pickTime() async {
     var selectedTime = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: TimeOfDay(hour: taskSelectedTime.hour, minute: taskSelectedTime.minute),
     );
     if (selectedTime != null) {
-      taskSelectedTime = selectedTime;
+      taskSelectedTime = DateTime(
+        taskSelectedDate.year,
+        taskSelectedDate.month,
+        taskSelectedDate.day,
+        selectedTime.hour,
+        selectedTime.minute,
+      );
       setState(() {});
     }
   }

@@ -98,17 +98,21 @@ class _TaskItemState extends State<TaskItem> {
                   children: [
                     Text(
                       widget.task.title,
-                      style: theme.textTheme.titleMedium,
+                      style: widget.task.isDone
+                          ? theme.textTheme.titleMedium!
+                              .copyWith(color: const Color(0xff61E757))
+                          : theme.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 5),
-                    Row(
-                      children: [
-                        Text(
+                    Container(
+                      constraints: BoxConstraints(maxHeight: 24, maxWidth: 195),
+                      child: SingleChildScrollView(
+                        child: Text(
                           widget.task.description,
                           style: theme.textTheme.bodyMedium!
                               .copyWith(color: theme.colorScheme.onSecondary),
                         ),
-                      ],
+                      ),
                     ),
                     const SizedBox(height: 5),
                     Row(
@@ -137,10 +141,11 @@ class _TaskItemState extends State<TaskItem> {
             ),
             Positioned(
               right: 0,
-              top: 25,
+              top: widget.task.isDone ? 35 : 30,
               child: GestureDetector(
                 onTap: () {
                   widget.task.isDone = !widget.task.isDone;
+                  setState(() {});
                 },
                 child: widget.task.isDone
                     ? const DoneButton()
