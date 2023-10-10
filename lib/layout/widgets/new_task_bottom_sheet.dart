@@ -18,18 +18,21 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
   late TextEditingController taskDescriptionController;
   var formKey = GlobalKey<FormState>();
   DateTime taskSelectedDate = DateTime.now();
-  DateTime taskSelectedTime = DateTime(
-    0,
-    0,
-    0,
-    DateTime.now().hour,
-    DateTime.now().minute,
-  );
+  late DateTime taskSelectedTime;
 
   @override
   void initState() {
     taskTitleController = TextEditingController();
     taskDescriptionController = TextEditingController();
+    taskSelectedTime = DateTime(
+      taskSelectedDate.year,
+      taskSelectedDate.month,
+      taskSelectedDate.day,
+      TimeOfDay.now().hour,
+      TimeOfDay.now().minute,
+    );
+    print(taskSelectedDate);
+    print(taskSelectedTime);
     super.initState();
   }
 
@@ -132,7 +135,10 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  TimeOfDay(hour: taskSelectedTime.hour, minute: taskSelectedTime.minute).format(context),
+                  TimeOfDay(
+                          hour: taskSelectedTime.hour,
+                          minute: taskSelectedTime.minute)
+                      .format(context),
                   style: TextStyle(color: theme.colorScheme.onSecondary),
                 ),
               ),
@@ -192,13 +198,16 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
 
     if (timeSelected != null) {
       taskSelectedTime = DateTime(
-        0,
-        0,
-        0,
+        taskSelectedDate.year,
+        taskSelectedDate.month,
+        taskSelectedDate.day,
         timeSelected.hour,
         timeSelected.minute,
       );
-      setState(() {});
+      setState(() {
+        print(taskSelectedDate);
+        print(taskSelectedTime);
+      });
     }
   }
 }
