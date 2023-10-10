@@ -34,7 +34,8 @@ class _HomeLayoutState extends State<HomeLayout> {
               isScrollControlled: true,
               constraints: BoxConstraints.loose(const Size.fromHeight(700)),
               context: context,
-              builder: (context) => const SingleChildScrollView(child: NewTaskBottomSheet()),
+              builder: (context) =>
+                  const SingleChildScrollView(child: NewTaskBottomSheet()),
             );
             setState(() {});
           },

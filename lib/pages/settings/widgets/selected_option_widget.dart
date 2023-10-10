@@ -14,7 +14,7 @@ class SelectedOption extends StatelessWidget {
       height: 50,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        color: theme.colorScheme.primary,
+        color: theme.colorScheme.background,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: theme.colorScheme.onSecondary,

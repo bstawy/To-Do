@@ -1,9 +1,21 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:todo/core/network_layer/firestore_utils.dart';
+import 'package:todo/core/utils/extract_date.dart';
 import 'package:todo/pages/home_view/widgets/task_item.dart';
 
-class HomeView extends StatelessWidget {
+import '../../model/task_model.dart';
+
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +46,7 @@ class HomeView extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     theme.colorScheme.secondary.withOpacity(0.3),
-                    theme.colorScheme.primary,
+                    theme.colorScheme.background,
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -42,10 +54,16 @@ class HomeView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: CalendarTimeline(
-                initialDate: DateTime.now(),
+                initialDate: selectedDate,
                 firstDate: DateTime.now(),
                 lastDate: DateTime(2024, 12, 31),
-                onDateSelected: (date) => print(date),
+                onDateSelected: (date) {
+                  if(selectedDate != date) {
+                    setState(() {
+                      selectedDate = date;
+                    });
+                  }
+                },
                 leftMargin: 20,
                 monthColor: theme.colorScheme.secondary,
                 dayColor: Colors.teal[200],
@@ -59,15 +77,82 @@ class HomeView extends StatelessWidget {
           height: 65,
         ),
         Expanded(
-          child: ListView.builder(
-            itemBuilder: (context, index) => const TaskItem(),
-            itemCount: 10,
-            padding: const EdgeInsets.only(
-              top: 0,
-              bottom: 90,
-            ),
+          child: StreamBuilder<QuerySnapshot<TaskModel>>(
+            stream: FirestoreUtils.getRealTimeDataFromFirestore(selectedDate),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(snapshot.error.toString()),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () => FirestoreUtils.getDataFromFirestore(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                );
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: theme.primaryColor,
+                  ),
+                );
+              }
+
+              var tasksList =
+                  snapshot.data?.docs.map((element) => element.data()).toList() ?? [];
+
+              return ListView.builder(
+                itemBuilder: (context, index) =>
+                    TaskItem(task: tasksList[index]),
+                itemCount: tasksList.length,
+                padding: const EdgeInsets.only(
+                  top: 0,
+                  bottom: 90,
+                ),
+              );
+            },
           ),
         ),
+        // Expanded(
+        //   child: FutureBuilder<List<TaskModel>>(
+        //     future: FirestoreUtils.getDataFromFirestore(),
+        //     builder: (context, snapshot) {
+        //       if (snapshot.hasError) {
+        //         return Column(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             Text(snapshot.error.toString()),
+        //             const SizedBox(height: 20),
+        //             ElevatedButton(
+        //               onPressed: () => FirestoreUtils.getDataFromFirestore(),
+        //               child: const Text('Retry'),
+        //             ),
+        //           ],
+        //         );
+        //       }
+        //       else if (snapshot.connectionState == ConnectionState.waiting) {
+        //         return Center(
+        //           child: CircularProgressIndicator(
+        //             color: theme.primaryColor,
+        //           ),
+        //         );
+        //       }
+        //       var tasksList = snapshot.data ?? [];
+        //       return ListView.builder(
+        //         itemBuilder: (context, index) =>
+        //             TaskItem(task: tasksList[index]),
+        //         itemCount: tasksList.length,
+        //         padding: const EdgeInsets.only(
+        //           top: 0,
+        //           bottom: 90,
+        //         ),
+        //       );
+        //     },
+        //   ),
+        // ),
       ],
     );
   }

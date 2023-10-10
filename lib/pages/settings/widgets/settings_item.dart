@@ -53,7 +53,7 @@ class SettingsItem extends StatelessWidget {
                 ),
                 Icon(
                   Icons.arrow_drop_down_outlined,
-                  color: theme.colorScheme.onSecondary,/*theme.colorScheme.primary*/
+                  color: theme.colorScheme.onSecondary,
                 ),
               ],
             ),

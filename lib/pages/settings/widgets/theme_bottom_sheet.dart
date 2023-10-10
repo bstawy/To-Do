@@ -26,17 +26,6 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
         children: [
           GestureDetector(
             onTap: () {
-              appProvider.changeTheme(ThemeMode.dark);
-              Navigator.pop(context);
-              //appProvider.changeThemeSheetStatus('close');
-            },
-            child: appProvider.isDarkMode()
-                ? const SelectedOption(selectedOptionTitle: 'Dark')
-                : const UnselectedOption(unselectedOptionTitle: 'Dark'),
-          ),
-          const SizedBox(height: 20),
-          GestureDetector(
-            onTap: () {
               appProvider.changeTheme(ThemeMode.light);
               Navigator.pop(context);
               //appProvider.changeThemeSheetStatus('close');
@@ -44,6 +33,17 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
             child: appProvider.isDarkMode()
                 ? const UnselectedOption(unselectedOptionTitle: 'Light')
                 : const SelectedOption(selectedOptionTitle: 'Light'),
+          ),
+          const SizedBox(height: 20),
+          GestureDetector(
+            onTap: () {
+              appProvider.changeTheme(ThemeMode.dark);
+              Navigator.pop(context);
+              //appProvider.changeThemeSheetStatus('close');
+            },
+            child: appProvider.isDarkMode()
+                ? const SelectedOption(selectedOptionTitle: 'Dark')
+                : const UnselectedOption(unselectedOptionTitle: 'Dark')
           ),
         ],
       ),
