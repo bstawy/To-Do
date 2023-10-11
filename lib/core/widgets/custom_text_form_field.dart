@@ -22,6 +22,9 @@ class CustomTextFormField extends StatelessWidget {
       controller: textEditingController,
       validator: validator,
       maxLines: maxLines,
+      onTapOutside: (event) {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       decoration: InputDecoration(
         hintText: title,
         hintStyle: theme.textTheme.bodyLarge!.copyWith(
