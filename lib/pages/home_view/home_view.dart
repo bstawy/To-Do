@@ -55,7 +55,7 @@ class _HomeViewState extends State<HomeView> {
               ),
               child: CalendarTimeline(
                 initialDate: selectedDate,
-                firstDate: DateTime.now(),
+                firstDate: DateTime(2023,01,01),
                 lastDate: DateTime(2024, 12, 31),
                 onDateSelected: (date) {
                   if(selectedDate != date) {
