@@ -53,7 +53,7 @@ class _EditTaskState extends State<EditTask> {
       taskTitleController.text = args.title;
     }
     if(taskDescriptionController.text == 'init') {
-      taskDescriptionController.text = args.title;
+      taskDescriptionController.text = args.description;
     }
     if(taskSelectedDate == initDate) {
       taskSelectedDate = args.date;
@@ -197,13 +197,19 @@ class _EditTaskState extends State<EditTask> {
                         child: MaterialButton(
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
+                              args.title = taskTitleController.text;
+                              args.description = taskDescriptionController.text;
+                              args.date = taskSelectedDate;
+                              args.time = taskSelectedTime;
+                              await FirestoreUtils.updateDataOnFirestore(args);
+
                               Navigator.pop(context);
                             } else {
                               print(
                                   formKey.currentState!.validate().toString());
                             }
                           },
-                          color: theme.primaryColor,
+                          color: args.isDone ? const Color(0xff61E757) : theme.primaryColor,
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 30),
                           shape: RoundedRectangleBorder(
