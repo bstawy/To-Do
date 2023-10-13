@@ -28,6 +28,12 @@ class FirestoreUtils {
     return docRef.delete();
   }
 
+  static Future<void> updateDataOnFirestore(TaskModel task) {
+    var collectionRef = getCollection();
+    var docRef = collectionRef.doc(task.id);
+    return docRef.update(task.toFirestore());
+  }
+
   static Future <List<TaskModel>> getDataFromFirestore() async {
     var snapshot = await getCollection().get();
     return snapshot.docs.map((element) => element.data()).toList();
