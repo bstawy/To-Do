@@ -31,13 +31,30 @@ class _HomeViewState extends State<HomeView> {
               width: mediaQuery.width,
               height: 200,
               padding: const EdgeInsets.only(
-                top: 65,
                 left: 52,
               ),
               color: theme.primaryColor,
-              child: Text(
-                'To Do List',
-                style: theme.textTheme.titleLarge,
+              child: Row(
+                children: [
+                  Text(
+                    'To Do List',
+                    style: theme.textTheme.titleLarge,
+                  ),
+                  const SizedBox(width: 150),
+                  IconButton(
+                    onPressed: () {
+                      selectedDate = DateTime.now();
+                      setState(() {});
+                    },
+                    icon: const Icon(Icons.radio_button_checked),
+                    color: theme.colorScheme.secondary,
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.logout_rounded),
+                    color: theme.colorScheme.secondary,
+                  ),
+                ],
               ),
             ),
             Container(
@@ -55,10 +72,10 @@ class _HomeViewState extends State<HomeView> {
               ),
               child: CalendarTimeline(
                 initialDate: selectedDate,
-                firstDate: DateTime(2023,01,01),
+                firstDate: DateTime(2023, 01, 01),
                 lastDate: DateTime(2024, 12, 31),
                 onDateSelected: (date) {
-                  if(selectedDate != date) {
+                  if (selectedDate != date) {
                     setState(() {
                       selectedDate = date;
                     });
@@ -101,8 +118,10 @@ class _HomeViewState extends State<HomeView> {
                 );
               }
 
-              var tasksList =
-                  snapshot.data?.docs.map((element) => element.data()).toList() ?? [];
+              var tasksList = snapshot.data?.docs
+                      .map((element) => element.data())
+                      .toList() ??
+                  [];
 
               return ListView.builder(
                 itemBuilder: (context, index) =>
