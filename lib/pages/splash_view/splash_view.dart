@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo/pages/login_view/login_view.dart';
 import '../../core/provider/app_provider.dart';
 import '../../layout/home_layout.dart';
 
@@ -19,7 +20,7 @@ class _SplashViewState extends State<SplashView> {
 
     Timer(
       const Duration(seconds: 1),
-      () => Navigator.pushReplacementNamed(context, HomeLayout.routeName),
+      () => Navigator.pushReplacementNamed(context, LoginView.routeName),
     );
   }
 
