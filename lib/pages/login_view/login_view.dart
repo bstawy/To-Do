@@ -1,6 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/core/provider/app_provider.dart';
+import 'package:todo/core/services/snackbar_service.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
+import 'package:todo/layout/home_layout.dart';
 import 'package:todo/pages/register_view/register_view.dart';
 
 class LoginView extends StatefulWidget {
@@ -24,7 +29,8 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-
+    var appProvider = Provider.of<AppProvider>(context);
+    print('userID = ${AppProvider.userID}');
     return Container(
       decoration: BoxDecoration(
         color: theme.colorScheme.background,
@@ -122,10 +128,12 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 25,),
+                  const SizedBox(
+                    height: 25,
+                  ),
                   MaterialButton(
                     onPressed: () {
-                      login();
+                      login(appProvider);
                     },
                     height: 50,
                     color: theme.colorScheme.primary,
@@ -168,25 +176,47 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  login() async {
-    if(formKey.currentState!.validate()){
+  login(AppProvider appProvider) async {
+    if (formKey.currentState!.validate()) {
+      EasyLoading.show();
 
       // call login api
       try {
-
-        var user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        final userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
         );
 
-      } on FirebaseAuthException catch (e) {
+        appProvider.logIn(userCredential);
 
+        EasyLoading.dismiss();
+
+        SnackBarService.showSuccessMessage('You logged in successfully');
+
+        Navigator.pushReplacementNamed(context, HomeLayout.routeName);
+
+      } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
+
+          EasyLoading.dismiss();
+          SnackBarService.showErrorMessage('No user found for that email.');
           print('No user found for that email.');
+
         } else if (e.code == 'wrong-password') {
+
+          EasyLoading.dismiss();
+          SnackBarService.showErrorMessage(
+              'Wrong password provided for that user.');
           print('Wrong password provided for that user.');
-        } else if(e.code == 'invalid-login-credentials') {
-          print("User doesn't exit");
+
+        } else if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+
+          EasyLoading.dismiss();
+          SnackBarService.showErrorMessage(
+              'Invalid login credentials');
+          print('Invalid login credentials');
+
         }
       }
     }
