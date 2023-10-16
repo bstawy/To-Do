@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
 import 'package:todo/pages/register_view/register_view.dart';
@@ -26,7 +27,7 @@ class _LoginViewState extends State<LoginView> {
 
     return Container(
       decoration: BoxDecoration(
-        color: theme.colorScheme.secondary,
+        color: theme.colorScheme.background,
         image: const DecorationImage(
           image: AssetImage('assets/images/login_pattern.png'),
           fit: BoxFit.cover,
@@ -167,9 +168,27 @@ class _LoginViewState extends State<LoginView> {
     );
   }
 
-  login() {
+  login() async {
     if(formKey.currentState!.validate()){
+
       // call login api
+      try {
+
+        var user = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+
+      } on FirebaseAuthException catch (e) {
+
+        if (e.code == 'user-not-found') {
+          print('No user found for that email.');
+        } else if (e.code == 'wrong-password') {
+          print('Wrong password provided for that user.');
+        } else if(e.code == 'invalid-login-credentials') {
+          print("User doesn't exit");
+        }
+      }
     }
   }
 }
