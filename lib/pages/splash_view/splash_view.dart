@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/pages/login_view/login_view.dart';
 import '../../core/provider/app_provider.dart';
-import '../../layout/home_layout.dart';
 
 class SplashView extends StatefulWidget {
   static const String routeName = 'splash-view';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:todo/core/network_layer/firestore_utils.dart';
-import 'package:todo/core/utils/extract_time.dart';
 import 'package:todo/pages/home_view/edit_task.dart';
 import 'package:todo/pages/home_view/widgets/done_button.dart';
 
@@ -105,7 +104,7 @@ class _TaskItemState extends State<TaskItem> {
                     ),
                     const SizedBox(height: 5),
                     Container(
-                      constraints: BoxConstraints(maxHeight: 24, maxWidth: 195),
+                      constraints: const BoxConstraints(maxHeight: 24, maxWidth: 195),
                       child: SingleChildScrollView(
                         child: Text(
                           widget.task.description,

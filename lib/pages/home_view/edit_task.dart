@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
-
 import '../../core/network_layer/firestore_utils.dart';
-import '../../core/provider/app_provider.dart';
 import '../../model/task_model.dart';
 
 class EditTask extends StatefulWidget {
