@@ -1,12 +1,13 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:todo/core/network_layer/firestore_utils.dart';
-import 'package:todo/core/utils/extract_date.dart';
 import 'package:todo/pages/home_view/widgets/task_item.dart';
+import 'package:todo/pages/login_view/login_view.dart';
 
+import '../../core/provider/app_provider.dart';
 import '../../model/task_model.dart';
 
 class HomeView extends StatefulWidget {
@@ -23,7 +24,8 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
-
+    var appProvider = Provider.of<AppProvider>(context);
+    print('userID = ${AppProvider.userID}');
     return Column(
       children: [
         Stack(
@@ -53,7 +55,10 @@ class _HomeViewState extends State<HomeView> {
                     color: theme.colorScheme.secondary,
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      appProvider.logOut();
+                      Navigator.pushReplacementNamed(context, LoginView.routeName);
+                    },
                     icon: const Icon(Icons.logout_rounded),
                     color: theme.colorScheme.secondary,
                   ),
@@ -238,43 +243,6 @@ class _HomeViewState extends State<HomeView> {
             },
           ),
         ),
-        // Expanded(
-        //   child: FutureBuilder<List<TaskModel>>(
-        //     future: FirestoreUtils.getDataFromFirestore(),
-        //     builder: (context, snapshot) {
-        //       if (snapshot.hasError) {
-        //         return Column(
-        //           mainAxisAlignment: MainAxisAlignment.center,
-        //           children: [
-        //             Text(snapshot.error.toString()),
-        //             const SizedBox(height: 20),
-        //             ElevatedButton(
-        //               onPressed: () => FirestoreUtils.getDataFromFirestore(),
-        //               child: const Text('Retry'),
-        //             ),
-        //           ],
-        //         );
-        //       }
-        //       else if (snapshot.connectionState == ConnectionState.waiting) {
-        //         return Center(
-        //           child: CircularProgressIndicator(
-        //             color: theme.primaryColor,
-        //           ),
-        //         );
-        //       }
-        //       var tasksList = snapshot.data ?? [];
-        //       return ListView.builder(
-        //         itemBuilder: (context, index) =>
-        //             TaskItem(task: tasksList[index]),
-        //         itemCount: tasksList.length,
-        //         padding: const EdgeInsets.only(
-        //           top: 0,
-        //           bottom: 90,
-        //         ),
-        //       );
-        //     },
-        //   ),
-        // ),
       ],
     );
   }
