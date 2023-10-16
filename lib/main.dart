@@ -1,6 +1,6 @@
-import 'dart:math';
-
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/core/provider/app_provider.dart';
@@ -48,6 +48,9 @@ class MyApplication extends StatelessWidget {
         HomeLayout.routeName: (context) => const HomeLayout(),
         EditTask.routeName: (context) => const EditTask(),
       },
+      builder: EasyLoading.init(
+        builder: BotToastInit(),
+      ),
     );
   }
 }
