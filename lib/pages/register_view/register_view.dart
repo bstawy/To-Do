@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/widgets/custom_text_form_field.dart';
@@ -139,7 +140,7 @@ class _RegisterViewState extends State<RegisterView> {
                         r"(?=^.{8,}$)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$",
                       );
 
-                      if(value != passwordController.text) {
+                      if (value != passwordController.text) {
                         return "Passwords doesn't match";
                       }
 
@@ -180,9 +181,30 @@ class _RegisterViewState extends State<RegisterView> {
     );
   }
 
-  register() {
-    if(formKey.currentState!.validate()){
-      // call api
+  register() async {
+    if (formKey.currentState!.validate()) {
+
+      try {
+
+        // call api to register
+        var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+
+        Navigator.pop(context);
+
+      } on FirebaseAuthException catch (e) {
+
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        print(e);
+      }
+
     }
   }
 }
