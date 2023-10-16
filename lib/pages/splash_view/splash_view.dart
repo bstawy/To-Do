@@ -14,20 +14,20 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  @override
-  void initState() {
-    super.initState();
-
-    Timer(
-      const Duration(seconds: 1),
-      () => Navigator.pushReplacementNamed(context, LoginView.routeName),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     var appProvider = Provider.of<AppProvider>(context);
 
-    return Image.asset(appProvider.splashScreen());
+    Timer(
+      const Duration(seconds: 1),
+          () => Navigator.pushReplacementNamed(
+          context, appProvider.isLoggedIn()),
+    );
+
+    return Image.asset(
+      appProvider.splashScreen(),
+      fit: BoxFit.cover,
+    );
   }
 }
