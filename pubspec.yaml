@@ -28,6 +28,7 @@ dependencies:
   cloud_firestore: ^4.9.3
   intl: ^0.18.1
   shimmer: ^3.0.0
+  firebase_auth: ^4.10.1
 
 
 dev_dependencies:
