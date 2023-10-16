@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:todo/core/utils/extract_date.dart';
 
 class TaskModel {
@@ -34,7 +33,8 @@ class TaskModel {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      date: ExtractDate.extractDate(DateTime.fromMillisecondsSinceEpoch(json['date'])),
+      date: DateTime.fromMillisecondsSinceEpoch( json['date']),
+      //ExtractDate.extractDate(DateTime.fromMillisecondsSinceEpoch(json['date'])),
       time: DateTime.fromMillisecondsSinceEpoch(json['time']),
       isDone: json['isDone'],
     );

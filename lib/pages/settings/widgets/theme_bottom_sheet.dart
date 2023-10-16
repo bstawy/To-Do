@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../../core/provider/app_provider.dart';
-import '../settings_view.dart';
 import 'selected_option_widget.dart';
 import 'unselected_option_widget.dart';
 

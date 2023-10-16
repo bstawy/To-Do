@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todo/core/provider/app_provider.dart';
 import 'package:todo/core/utils/extract_date.dart';
 
 import '../../model/task_model.dart';
@@ -7,7 +8,7 @@ class FirestoreUtils {
 
   static CollectionReference<TaskModel> getCollection() {
     return FirebaseFirestore.instance
-        .collection('Tasks')
+        .collection(AppProvider.userID!)
         .withConverter<TaskModel>(
           fromFirestore: (snapshot, _) =>
               TaskModel.fromFirestore(snapshot.data()!),
@@ -26,6 +27,12 @@ class FirestoreUtils {
     var collectionRef = getCollection();
     var docRef = collectionRef.doc(task.id);
     return docRef.delete();
+  }
+
+  static Future<void> updateDataOnFirestore(TaskModel task) {
+    var collectionRef = getCollection();
+    var docRef = collectionRef.doc(task.id);
+    return docRef.update(task.toFirestore());
   }
 
   static Future <List<TaskModel>> getDataFromFirestore() async {

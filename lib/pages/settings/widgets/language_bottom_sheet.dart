@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo/pages/settings/settings_view.dart';
-
-import '../../../core/provider/app_provider.dart';
 import 'selected_option_widget.dart';
 import 'unselected_option_widget.dart';
 
@@ -17,9 +13,6 @@ class LanguageBottomSheetWidget extends StatefulWidget {
 class _LanguageBottomSheetWidgetState extends State<LanguageBottomSheetWidget> {
   @override
   Widget build(BuildContext context) {
-    var appProvider = Provider.of<AppProvider>(context);
-    var theme = Theme.of(context);
-
     return Container(
       height: 350,
       padding: const EdgeInsets.all(20),
@@ -36,7 +29,7 @@ class _LanguageBottomSheetWidgetState extends State<LanguageBottomSheetWidget> {
               selectedOptionTitle: 'English',
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           GestureDetector(
             onTap: () {
               //appProvider.changeLanguage('ar');

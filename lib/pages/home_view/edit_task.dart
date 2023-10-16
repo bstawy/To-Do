@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
-
 import '../../core/network_layer/firestore_utils.dart';
-import '../../core/provider/app_provider.dart';
 import '../../model/task_model.dart';
 
 class EditTask extends StatefulWidget {
@@ -20,11 +17,15 @@ class _EditTaskState extends State<EditTask> {
   late TextEditingController taskDescriptionController;
   DateTime taskSelectedDate = DateTime.now();
   late DateTime taskSelectedTime;
+  DateTime initDate =  DateTime.now();
+  DateTime initTime = DateTime.now();
 
   @override
   void initState() {
     taskTitleController = TextEditingController();
+    taskTitleController.text = 'init';
     taskDescriptionController = TextEditingController();
+    taskDescriptionController.text = 'init';
     taskSelectedTime = DateTime(
       taskSelectedDate.year,
       taskSelectedDate.month,
@@ -32,6 +33,8 @@ class _EditTaskState extends State<EditTask> {
       TimeOfDay.now().hour,
       TimeOfDay.now().minute,
     );
+    initDate = taskSelectedDate;
+    initTime = taskSelectedTime;
     super.initState();
   }
 
@@ -42,16 +45,27 @@ class _EditTaskState extends State<EditTask> {
     super.dispose();
   }
 
+  initValues(var args) {
+    if(taskTitleController.text == 'init') {
+      taskTitleController.text = args.title;
+    }
+    if(taskDescriptionController.text == 'init') {
+      taskDescriptionController.text = args.description;
+    }
+    if(taskSelectedDate == initDate) {
+      taskSelectedDate = args.date;
+    }
+    if(taskSelectedTime == initTime) {
+      taskSelectedTime = args.time;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as TaskModel;
-    taskTitleController.text = args.title;
-    taskDescriptionController.text = args.description;
-    taskSelectedDate = args.date;
-    taskSelectedTime = args.time;
+    initValues(args);
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
-    var appProvider = Provider.of<AppProvider>(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -180,24 +194,19 @@ class _EditTaskState extends State<EditTask> {
                         child: MaterialButton(
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              /*
-                              var task = TaskModel(
-                                title: taskTitleController.text,
-                                description: taskDescriptionController.text,
-                                date: taskSelectedDate,
-                                time: taskSelectedDate,
-                                isDone: false,
-                              );
+                              args.title = taskTitleController.text;
+                              args.description = taskDescriptionController.text;
+                              args.date = taskSelectedDate;
+                              args.time = taskSelectedTime;
+                              await FirestoreUtils.updateDataOnFirestore(args);
 
-                              await FirestoreUtils.addDataToFirestore(task);
-*/
                               Navigator.pop(context);
                             } else {
                               print(
                                   formKey.currentState!.validate().toString());
                             }
                           },
-                          color: theme.primaryColor,
+                          color: args.isDone ? const Color(0xff61E757) : theme.primaryColor,
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 30),
                           shape: RoundedRectangleBorder(
@@ -234,7 +243,8 @@ class _EditTaskState extends State<EditTask> {
   pickTime() async {
     var selectedTime = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay(hour: taskSelectedTime.hour, minute: taskSelectedTime.minute),
+      initialTime: TimeOfDay(
+          hour: taskSelectedTime.hour, minute: taskSelectedTime.minute),
     );
     if (selectedTime != null) {
       taskSelectedTime = DateTime(
