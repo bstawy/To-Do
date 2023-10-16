@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:todo/core/services/snackbar_service.dart';
 
 import '../../core/widgets/custom_text_form_field.dart';
 
@@ -27,7 +29,7 @@ class _RegisterViewState extends State<RegisterView> {
 
     return Container(
       decoration: BoxDecoration(
-        color: theme.colorScheme.secondary,
+        color: theme.colorScheme.background,
         image: const DecorationImage(
           image: AssetImage('assets/images/login_pattern.png'),
           fit: BoxFit.cover,
@@ -172,6 +174,21 @@ class _RegisterViewState extends State<RegisterView> {
                       ],
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'OR Log in !',
+                        textAlign: TextAlign.start,
+                        style: theme.textTheme.bodyLarge!
+                            .copyWith(color: theme.colorScheme.onSecondary),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -183,28 +200,41 @@ class _RegisterViewState extends State<RegisterView> {
 
   register() async {
     if (formKey.currentState!.validate()) {
+      EasyLoading.show();
 
       try {
-
         // call api to register
-        var user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
         );
+
+        EasyLoading.dismiss();
+        SnackBarService.showSuccessMessage(
+            'Your account has been created successfully');
 
         Navigator.pop(context);
 
       } on FirebaseAuthException catch (e) {
 
         if (e.code == 'weak-password') {
+
+          EasyLoading.dismiss();
+          SnackBarService.showErrorMessage('The password provided is too weak.');
           print('The password provided is too weak.');
+
         } else if (e.code == 'email-already-in-use') {
+
+          EasyLoading.dismiss();
+          print(e.message);
+          SnackBarService.showErrorMessage('The account already exists for that email.');
           print('The account already exists for that email.');
+
         }
       } catch (e) {
         print(e);
       }
-
     }
   }
 }
