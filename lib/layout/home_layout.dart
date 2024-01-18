@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:todo/layout/widgets/new_task_bottom_sheet.dart';
 import 'package:todo/pages/home_view/home_view.dart';
 import 'package:todo/pages/settings/settings_view.dart';
-
-import '../core/provider/app_provider.dart';
 
 class HomeLayout extends StatefulWidget {
   static const String routeName = 'home-layout-view';
@@ -21,7 +18,6 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var appProvider = Provider.of<AppProvider>(context);
 
     return Scaffold(
       extendBody: true,
@@ -40,6 +36,7 @@ class _HomeLayoutState extends State<HomeLayout> {
             setState(() {});
           },
           elevation: 0,
+          shape: const CircleBorder(),
           child: const Icon(
             Icons.add,
             color: Colors.white,

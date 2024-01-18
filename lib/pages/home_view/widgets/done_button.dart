@@ -7,7 +7,7 @@ class DoneButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
-    return Container(
+    return SizedBox(
       width: 60,
       height: 35,
       child: Text(

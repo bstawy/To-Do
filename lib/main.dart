@@ -9,7 +9,6 @@ import 'package:todo/layout/home_layout.dart';
 import 'package:todo/pages/home_view/edit_task.dart';
 import 'package:todo/pages/login_view/login_view.dart';
 import 'package:todo/pages/register_view/register_view.dart';
-import 'package:todo/pages/splash_view/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -40,9 +39,8 @@ class MyApplication extends StatelessWidget {
       themeMode: appProvider.currentTheme,
       theme: ApplicationTheme.lightTheme,
       darkTheme: ApplicationTheme.darkTheme,
-      initialRoute: SplashView.routeName,
+      initialRoute: appProvider.isLoggedIn(),
       routes: {
-        SplashView.routeName: (context) => const SplashView(),
         LoginView.routeName: (context) => const LoginView(),
         RegisterView.routeName: (context) => const RegisterView(),
         HomeLayout.routeName: (context) => const HomeLayout(),

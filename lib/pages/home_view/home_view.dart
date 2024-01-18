@@ -51,13 +51,13 @@ class _HomeViewState extends State<HomeView> {
                       setState(() {});
                     },
                     icon: const Icon(Icons.restart_alt_rounded),
-
                     color: theme.colorScheme.secondary,
                   ),
                   IconButton(
                     onPressed: () {
                       appProvider.logOut();
-                      Navigator.pushReplacementNamed(context, LoginView.routeName);
+                      Navigator.pushReplacementNamed(
+                          context, LoginView.routeName);
                     },
                     icon: const Icon(Icons.logout_rounded),
                     color: theme.colorScheme.secondary,
@@ -120,110 +120,106 @@ class _HomeViewState extends State<HomeView> {
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Shimmer.fromColors(
-                    baseColor: theme.primaryColor,
-                    highlightColor: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 450),
+                  baseColor: theme.primaryColor,
+                  highlightColor: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 450),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 33, vertical: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 33, vertical: 10),
+                        width: mediaQuery.width,
+                        height: 115,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        child: Container(
-                          width: mediaQuery.width,
-                          height: 115,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Stack(children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 5,
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  decoration: BoxDecoration(
-                                    color: theme.primaryColor,
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Task Title",
-                                      style: theme.textTheme.titleMedium,
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Container(
-                                      constraints: const BoxConstraints(
-                                          maxHeight: 24, maxWidth: 195),
-                                      child: SingleChildScrollView(
-                                        child: Text(
-                                          "Task Description",
-                                          style: theme.textTheme.bodyMedium!
-                                              .copyWith(
-                                                  color: theme
-                                                      .colorScheme.onSecondary),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.alarm,
-                                          color: theme.colorScheme.onSecondary
-                                              .withOpacity(0.5),
-                                          size: 20,
-                                        ),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          "Task Time",
-                                          style: theme.textTheme.bodyMedium!
-                                              .copyWith(
-                                            color: theme.colorScheme.onSecondary
-                                                .withOpacity(0.5),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Positioned(
-                              right: 0,
-                              top: 30,
-                              child: GestureDetector(
-                                onTap: () {},
-                                child: Container(
-                                  width: 60,
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                    color: theme.primaryColor,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Image.asset(
-                                      'assets/images/check_icon.png'),
+                        child: Stack(children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 5,
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: theme.primaryColor,
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
                               ),
+                              const SizedBox(width: 15),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Task Title",
+                                    style: theme.textTheme.titleMedium,
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Container(
+                                    constraints: const BoxConstraints(
+                                        maxHeight: 24, maxWidth: 195),
+                                    child: SingleChildScrollView(
+                                      child: Text(
+                                        "Task Description",
+                                        style: theme.textTheme.bodyMedium!
+                                            .copyWith(
+                                                color: theme
+                                                    .colorScheme.onSecondary),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.alarm,
+                                        color: theme.colorScheme.onSecondary
+                                            .withOpacity(0.5),
+                                        size: 20,
+                                      ),
+                                      const SizedBox(width: 5),
+                                      Text(
+                                        "Task Time",
+                                        style: theme.textTheme.bodyMedium!
+                                            .copyWith(
+                                          color: theme.colorScheme.onSecondary
+                                              .withOpacity(0.5),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Positioned(
+                            right: 0,
+                            top: 30,
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Container(
+                                width: 60,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                  color: theme.primaryColor,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child:
+                                    Image.asset('assets/images/check_icon.png'),
+                              ),
                             ),
-                          ]),
-                        ),
+                          ),
+                        ]),
                       ),
-                    ));
-                /*Center(
-                  child: CircularProgressIndicator(
-                    color: theme.primaryColor,
+                    ),
                   ),
-                );*/
+                );
               }
 
               var tasksList = snapshot.data?.docs
