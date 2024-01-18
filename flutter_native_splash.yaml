@@ -16,7 +16,7 @@ flutter_native_splash:
     # Configure dark mode splash screen
     color_dark: "#060E1E"
     icon_background_color_dark: "#060E1E"
-    image_dark: assets/images/splash_screen_logo_dark.png
+    image_dark: assets/images/splash_screen_logo.png
 
   # The android, ios and web parameters can be used to disable generating a splash screen on a given
   # platform.
