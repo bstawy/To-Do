@@ -21,7 +21,6 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var appProvider = Provider.of<AppProvider>(context);
 
     return Scaffold(
       extendBody: true,
@@ -40,6 +39,7 @@ class _HomeLayoutState extends State<HomeLayout> {
             setState(() {});
           },
           elevation: 0,
+          shape: const CircleBorder(),
           child: const Icon(
             Icons.add,
             color: Colors.white,
