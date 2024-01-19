@@ -95,12 +95,15 @@ class _TaskItemState extends State<TaskItem> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.task.title,
-                      style: widget.task.isDone
-                          ? theme.textTheme.titleMedium!
-                              .copyWith(color: const Color(0xff61E757))
-                          : theme.textTheme.titleMedium,
+                    Container(
+                      constraints: const BoxConstraints(maxWidth: 195),
+                      child: Text(
+                        widget.task.title,
+                        style: widget.task.isDone
+                            ? theme.textTheme.titleMedium!
+                                .copyWith(color: const Color(0xff61E757), overflow: TextOverflow.ellipsis,)
+                            : theme.textTheme.titleMedium!.copyWith(overflow: TextOverflow.ellipsis,),
+                      ),
                     ),
                     const SizedBox(height: 5),
                     Container(
