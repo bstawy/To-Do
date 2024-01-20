@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:todo/core/network_layer/firestore_utils.dart';
+import 'package:todo/core/network_layer/firebase_utils.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
 import 'package:todo/model/task_model.dart';
 
@@ -154,7 +154,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                       isDone: false,
                     );
 
-                    await FirestoreUtils.addDataToFirestore(task);
+                    await FirebaseUtils.addDataToFirestore(task);
 
                     Navigator.pop(context);
                   } else {

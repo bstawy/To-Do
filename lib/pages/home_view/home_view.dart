@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:todo/core/network_layer/firestore_utils.dart';
+import 'package:todo/core/network_layer/firebase_utils.dart';
 import 'package:todo/pages/home_view/widgets/task_item.dart';
 import 'package:todo/pages/login_view/login_view.dart';
 
@@ -103,7 +103,7 @@ class _HomeViewState extends State<HomeView> {
         ),
         Expanded(
           child: StreamBuilder<QuerySnapshot<TaskModel>>(
-            stream: FirestoreUtils.getRealTimeDataFromFirestore(selectedDate),
+            stream: FirebaseUtils.getRealTimeDataFromFirestore(selectedDate),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Column(
@@ -112,7 +112,7 @@ class _HomeViewState extends State<HomeView> {
                     Text(snapshot.error.toString()),
                     const SizedBox(height: 20),
                     ElevatedButton(
-                      onPressed: () => FirestoreUtils.getDataFromFirestore(),
+                      onPressed: () => FirebaseUtils.getDataFromFirestore(),
                       child: const Text('Retry'),
                     ),
                   ],

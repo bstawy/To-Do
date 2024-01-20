@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:todo/core/network_layer/firestore_utils.dart';
+import 'package:todo/core/network_layer/firebase_utils.dart';
 import 'package:todo/pages/home_view/edit_task.dart';
 import 'package:todo/pages/home_view/widgets/done_button.dart';
 
@@ -58,7 +58,7 @@ class _TaskItemState extends State<TaskItem> {
           children: [
             SlidableAction(
               onPressed: (context) {
-                FirestoreUtils.deleteDataFromFirestore(widget.task);
+                FirebaseUtils.deleteDataFromFirestore(widget.task);
               },
               backgroundColor: const Color(0xffEC4B4B),
               foregroundColor: Colors.white,

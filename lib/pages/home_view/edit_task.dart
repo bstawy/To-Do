@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
-import '../../core/network_layer/firestore_utils.dart';
+import '../../core/network_layer/firebase_utils.dart';
 import '../../model/task_model.dart';
 
 class EditTask extends StatefulWidget {
@@ -198,7 +198,7 @@ class _EditTaskState extends State<EditTask> {
                               args.description = taskDescriptionController.text;
                               args.date = taskSelectedDate;
                               args.time = taskSelectedTime;
-                              await FirestoreUtils.updateDataOnFirestore(args);
+                              await FirebaseUtils.updateDataOnFirestore(args);
 
                               Navigator.pop(context);
                             } else {
