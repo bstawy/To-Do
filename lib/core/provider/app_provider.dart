@@ -13,7 +13,6 @@ class AppProvider extends ChangeNotifier {
     bool isDark = prefs.getBool('isDark') ?? false;
     currentTheme = isDark ? ThemeMode.dark : ThemeMode.light;
     userID = prefs.getString('UID') ?? 'null';
-    print('userID = $userID');
   }
 
   addThemeValueToSF(bool isDark) async {
@@ -40,11 +39,6 @@ class AppProvider extends ChangeNotifier {
       return HomeLayout.routeName;
     }
     return LoginView.routeName;
-  }
-
-  logIn(UserCredential user) {
-    userID = user.user!.uid;
-    prefs.setString('UID', userID!);
   }
 
   logOut() async {
