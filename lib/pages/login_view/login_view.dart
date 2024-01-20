@@ -29,7 +29,6 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     loginViewModel.dispose();
   }
