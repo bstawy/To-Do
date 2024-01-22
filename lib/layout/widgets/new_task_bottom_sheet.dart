@@ -29,8 +29,6 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
       TimeOfDay.now().hour,
       TimeOfDay.now().minute,
     );
-    print(taskSelectedDate);
-    print(taskSelectedTime);
     super.initState();
   }
 
@@ -157,8 +155,6 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                     await FirebaseUtils.addDataToFirestore(task);
 
                     Navigator.pop(context);
-                  } else {
-                    print(formKey.currentState!.validate().toString());
                   }
                 },
                 color: theme.primaryColor,
@@ -203,8 +199,6 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
         timeSelected.minute,
       );
       setState(() {
-        print(taskSelectedDate);
-        print(taskSelectedTime);
       });
     }
   }

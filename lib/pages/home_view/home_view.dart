@@ -25,7 +25,7 @@ class _HomeViewState extends State<HomeView> {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
     var appProvider = Provider.of<AppProvider>(context);
-    print('userID = ${AppProvider.userID}');
+
     return Column(
       children: [
         Stack(

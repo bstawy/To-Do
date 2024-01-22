@@ -201,9 +201,6 @@ class _EditTaskState extends State<EditTask> {
                               await FirebaseUtils.updateDataOnFirestore(args);
 
                               Navigator.pop(context);
-                            } else {
-                              print(
-                                  formKey.currentState!.validate().toString());
                             }
                           },
                           color: args.isDone ? const Color(0xff61E757) : theme.primaryColor,

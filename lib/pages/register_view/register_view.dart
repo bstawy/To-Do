@@ -166,22 +166,17 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                         MaterialButton(
                           onPressed: () async {
-                            print("/*/*/*/*/*//*/*/*/*/*/*\nshow loading/*/*/*/*");
                             EasyLoading.show();
                             await vm.register();
-                            print("Register View ");
-
                             if (vm.registrationStatus ==
                                 "success") {
                               EasyLoading.dismiss();
-                              print("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/\n${vm.registrationStatus}/*/*/*/*/*/*/*/*//*/*/");
                               SnackBarService.showAlertMessage(
                                   'Success, Please verify your account from your Mail Box');
                               Timer(const Duration(seconds: 3), () {Navigator.pop(context);});
                             } else if (vm.registrationStatus ==
                                 "email-already-in-use") {
                               EasyLoading.dismiss();
-                              print("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/\n${vm.registrationStatus}/*/*/*/*/*/*/*/*//*/*/");
 
                               SnackBarService.showErrorMessage(
                                   'There is an account already existed for that email.');
