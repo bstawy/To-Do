@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/pages/settings/widgets/language_bottom_sheet.dart';
-import 'package:todo/pages/settings/widgets/settings_item.dart';
-import 'package:todo/pages/settings/widgets/theme_bottom_sheet.dart';
 import '../../core/provider/app_provider.dart';
+import '../../pages/settings/widgets/language_bottom_sheet.dart';
+import '../../pages/settings/widgets/settings_item.dart';
+import '../../pages/settings/widgets/theme_bottom_sheet.dart';
+
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});

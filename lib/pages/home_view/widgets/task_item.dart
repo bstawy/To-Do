@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:todo/core/network_layer/firebase_utils.dart';
-import 'package:todo/pages/home_view/edit_task.dart';
-import 'package:todo/pages/home_view/widgets/done_button.dart';
-
+import '../../../core/network_layer/firebase_utils.dart';
+import '../../../pages/home_view/edit_task.dart';
+import '../../../pages/home_view/widgets/done_button.dart';
 import '../../../model/task_model.dart';
 
 class TaskItem extends StatefulWidget {

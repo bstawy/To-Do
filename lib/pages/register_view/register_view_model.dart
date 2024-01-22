@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo/core/network_layer/firebase_utils.dart';
+import '../../core/network_layer/firebase_utils.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo/core/network_layer/firebase_utils.dart';
-import 'package:todo/core/provider/app_provider.dart';
+import '../../core/network_layer/firebase_utils.dart';
+import '../../core/provider/app_provider.dart';
 
 class LoginViewModel extends ChangeNotifier {
   String? _userID;

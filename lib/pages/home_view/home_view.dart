@@ -1,13 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:todo/core/network_layer/firebase_utils.dart';
-import 'package:todo/pages/home_view/widgets/task_item.dart';
-import 'package:todo/pages/login_view/login_view.dart';
-
+import '../../core/network_layer/firebase_utils.dart';
 import '../../core/provider/app_provider.dart';
+import '../../pages/home_view/widgets/task_item.dart';
+import '../../pages/login_view/login_view.dart';
 import '../../model/task_model.dart';
 
 class HomeView extends StatefulWidget {

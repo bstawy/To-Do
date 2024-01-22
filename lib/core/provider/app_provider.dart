@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo/layout/home_layout.dart';
-import 'package:todo/pages/login_view/login_view.dart';
+import '../../layout/home_layout.dart';
+import '../../pages/login_view/login_view.dart';
 
 class AppProvider extends ChangeNotifier {
   ThemeMode? currentTheme ;
