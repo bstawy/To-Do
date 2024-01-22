@@ -5,21 +5,15 @@ import '../../core/network_layer/firebase_utils.dart';
 import '../../core/provider/app_provider.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  String? _userID;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   String? _loginStatus = "";
 
-  String? get userID => _userID;
   GlobalKey<FormState>? get formKey => _formKey;
   TextEditingController? get email => _email;
   TextEditingController? get password => _password;
   String? get loginStatus => _loginStatus;
-
-  LoginViewModel() {
-    _userID = AppProvider.userID;
-  }
 
   login() async {
     if (_formKey.currentState!.validate()) {
@@ -31,7 +25,7 @@ class LoginViewModel extends ChangeNotifier {
         (r) {
           final UserCredential user = r;
           if (isVerified(user)) {
-            storeUserID(user.user!.uid);
+            storeUserIdInSharedPrefs(user.user!.uid);
             _loginStatus = "success";
           } else {
             _loginStatus = "email-not-verified";
@@ -50,10 +44,9 @@ class LoginViewModel extends ChangeNotifier {
     return false;
   }
 
-  storeUserID(String id) async {
-    _userID = id;
-    AppProvider.userID = _userID;
+  storeUserIdInSharedPrefs(String id) async {
+    AppProvider.userID = id;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString("UID", _userID!);
+    prefs.setString("UID", id);
   }
 }
