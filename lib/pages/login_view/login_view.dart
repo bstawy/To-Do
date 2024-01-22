@@ -28,12 +28,6 @@ class _LoginViewState extends State<LoginView> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    loginViewModel.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
 
