@@ -8,12 +8,16 @@ class LoginViewModel extends ChangeNotifier {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  final TextEditingController _emailForResetPassword = TextEditingController();
   String? _loginStatus = "";
+  String? _resetPasswordStatus = "";
 
   GlobalKey<FormState>? get formKey => _formKey;
   TextEditingController? get email => _email;
   TextEditingController? get password => _password;
+  TextEditingController? get emailForResetPassword => _emailForResetPassword;
   String? get loginStatus => _loginStatus;
+  String? get resetPasswordStatus => _resetPasswordStatus;
 
   login() async {
     if (_formKey.currentState!.validate()) {
@@ -48,5 +52,12 @@ class LoginViewModel extends ChangeNotifier {
     AppProvider.userID = id;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("UID", id);
+  }
+
+  resetPassword(var formKey) async {
+    if (formKey.currentState!.validate()) {
+      _resetPasswordStatus = await FirebaseUtils.resetPassword(_emailForResetPassword.text);
+    }
+    if (_loginStatus!.isEmpty) _loginStatus = "invalid";
   }
 }
