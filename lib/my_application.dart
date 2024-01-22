@@ -18,11 +18,11 @@ class MyApplication extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'To Do',
+      title: "To Do",
       themeMode: appProvider.currentTheme,
       theme: ApplicationTheme.lightTheme,
       darkTheme: ApplicationTheme.darkTheme,
-      initialRoute: appProvider.isLoggedIn(),
+      initialRoute: appProvider.logging(),
       routes: {
         LoginView.routeName: (context) => const LoginView(),
         RegisterView.routeName: (context) => const RegisterView(),
