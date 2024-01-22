@@ -1,12 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:todo/core/provider/app_provider.dart';
-import 'package:todo/core/utils/extract_date.dart';
-
+import '../../core/provider/app_provider.dart';
+import '../../core/utils/extract_date.dart';
 import '../../model/task_model.dart';
 
 class FirebaseUtils {
+  static Future<Either<String?, UserCredential>> register(
+      String email, String password) async {
+    late UserCredential user;
+    try {
+      user = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      return left(e.code);
+    }
+    return Right(user);
+  }
+
   static Future<Either<String, UserCredential>> logIn(
       String email, String password) async {
     late UserCredential user;
@@ -16,9 +29,7 @@ class FirebaseUtils {
         password: password,
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == "invalid-credential") {
-        return Left(e.code);
-      }
+      return Left(e.code);
     }
     return Right(user);
   }
