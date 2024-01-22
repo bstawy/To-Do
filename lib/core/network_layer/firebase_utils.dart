@@ -40,13 +40,23 @@ class FirebaseUtils {
     return Right(user);
   }
 
+  static Future<String> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      return e.code;
+    }
+    return "success";
+  }
+
   static logOut() async {
     await FirebaseAuth.instance.signOut();
   }
 
   static CollectionReference<TaskModel> getCollection() {
     return FirebaseFirestore.instance
-        .collection(AppProvider.userID!)
+        .collection(AppProvider.userID)
         .withConverter<TaskModel>(
           fromFirestore: (snapshot, _) =>
               TaskModel.fromFirestore(snapshot.data()!),
