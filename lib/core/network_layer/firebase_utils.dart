@@ -14,10 +14,16 @@ class FirebaseUtils {
         email: email,
         password: password,
       );
+
+      await verifyEmail();
     } on FirebaseAuthException catch (e) {
       return left(e.code);
     }
     return Right(user);
+  }
+
+  static verifyEmail() async {
+    await FirebaseAuth.instance.currentUser!.sendEmailVerification();
   }
 
   static Future<Either<String, UserCredential>> logIn(
