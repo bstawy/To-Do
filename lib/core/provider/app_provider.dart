@@ -1,49 +1,43 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/network_layer/firebase_utils.dart';
 import '../../layout/home_layout.dart';
 import '../../pages/login_view/login_view.dart';
 
 class AppProvider extends ChangeNotifier {
   ThemeMode? currentTheme ;
   SharedPreferences prefs;
-  static String? userID;
+  static String userID = "";
 
   AppProvider(this.prefs) {
-    bool isDark = prefs.getBool('isDark') ?? false;
+    userID = prefs.getString("UID") ?? "";
+    bool isDark = prefs.getBool("isDark") ?? false;
     currentTheme = isDark ? ThemeMode.dark : ThemeMode.light;
-    userID = prefs.getString('UID') ?? 'null';
   }
 
-  addThemeValueToSF(bool isDark) async {
-    isDark ? prefs.setBool('isDark', true) : prefs.setBool('isDark', false);
+  isDarkMode() => currentTheme == ThemeMode.dark;
+
+  addThemeValueToSharedPrefs(bool isDark) async {
+    isDark ? prefs.setBool("isDark", true) : prefs.setBool("isDark", false);
   }
 
   changeTheme(ThemeMode newTheme) {
     if (currentTheme == newTheme) return;
     currentTheme = newTheme;
-    addThemeValueToSF(currentTheme == ThemeMode.dark);
+    addThemeValueToSharedPrefs(currentTheme == ThemeMode.dark);
     notifyListeners();
   }
 
-  isDarkMode() => currentTheme == ThemeMode.dark;
-
-  splashScreen() {
-    return isDarkMode()
-        ? 'assets/images/splash_dark.png'
-        : 'assets/images/splash.png';
-  }
-
-  isLoggedIn(){
-    if(userID != 'null') {
-      return HomeLayout.routeName;
+  logging(){
+    if(userID.isEmpty) {
+      return LoginView.routeName;
     }
-    return LoginView.routeName;
+    return HomeLayout.routeName;
   }
 
   logOut() async {
-    userID = 'null';
-    prefs.setString('UID', 'null');
-    await FirebaseAuth.instance.signOut();
+    userID = "";
+    prefs.setString("UID", "");
+    await FirebaseUtils.logOut();
   }
 }
