@@ -18,7 +18,6 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   late LoginViewModel loginViewModel;
-  var formKey = GlobalKey<FormState>();
   bool isVisible = false;
 
   @override
@@ -34,169 +33,183 @@ class _LoginViewState extends State<LoginView> {
     return ChangeNotifierProvider(
       create: (context) => loginViewModel,
       builder: (context, child) {
-        return Container(
-          decoration: BoxDecoration(
-            color: theme.colorScheme.background,
-            image: const DecorationImage(
-              image: AssetImage('assets/images/login_pattern.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              title: Text('Login', style: theme.textTheme.titleLarge),
-              centerTitle: true,
-              toolbarHeight: 120,
-            ),
-            body: Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.18,
-                left: 20,
-                right: 20,
-              ),
-              child: SingleChildScrollView(
-                child: Consumer<LoginViewModel>(
-                  builder: (BuildContext context, LoginViewModel loginViewModel,
-                      Widget? child) {
-                    return Form(
-                      key: formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            'Welcome Back!',
-                            style: theme.textTheme.titleLarge!
-                                .copyWith(color: theme.colorScheme.onSecondary),
-                          ),
-                          const SizedBox(height: 40),
-                          CustomTextFormField(
-                            title: 'Enter your email',
-                            textEditingController: loginViewModel.email,
-                            labelText: 'Email',
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'You must enter your e-mail address';
-                              }
-
-                              var regex = RegExp(
-                                  r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
-                              if (!regex.hasMatch(value)) {
-                                return 'invalid e-mail address';
-                              }
-
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          CustomTextFormField(
-                            title: 'Enter your password',
-                            textEditingController: loginViewModel.password,
-                            labelText: 'Password',
-                            obscureText: !isVisible,
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                isVisible = !isVisible;
-                                setState(() {});
-                              },
-                              child: isVisible == true
-                                  ? const Icon(Icons.visibility_off)
-                                  : const Icon(Icons.visibility),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'You must enter your password';
-                              }
-
-                              var regex = RegExp(
-                                r"(?=^.{8,}$)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$",
-                              );
-
-                              if (!regex.hasMatch(value)) {
-                                return 'invalid password';
-                              }
-
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Forget password ?',
-                                textAlign: TextAlign.start,
-                                style: theme.textTheme.bodyLarge!.copyWith(
-                                    color: theme.colorScheme.onSecondary),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 25,
-                          ),
-                          MaterialButton(
-                            onPressed: () async {
-                              EasyLoading.show();
-                              String response =
-                                  await loginViewModel.login(formKey: formKey);
-                              EasyLoading.dismiss();
-
-                              if (response == "success") {
-                                SnackBarService.showSuccessMessage(
-                                    'You logged in successfully');
-                                if (mounted) {
-                                  Navigator.pushReplacementNamed(
-                                      context, HomeLayout.routeName);
-                                }
-                              } else if(response == "invalid-credential") {
-                                SnackBarService.showErrorMessage(
-                                    'Invalid login credentials');
-                              }
-                            },
-                            height: 50,
-                            color: theme.colorScheme.primary,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Login',
-                                  style: theme.textTheme.bodyLarge!.copyWith(
-                                      color: theme.colorScheme.secondary,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const Icon(Icons.arrow_forward_rounded)
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                    context, RegisterView.routeName);
-                              },
-                              child: Text(
-                                'OR Create new account !',
-                                textAlign: TextAlign.start,
-                                style: theme.textTheme.bodyLarge!.copyWith(
-                                    color: theme.colorScheme.onSecondary),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
+        return Consumer<LoginViewModel>(
+          builder: (context, vm, child) {
+            return Container(
+              decoration: BoxDecoration(
+                color: theme.colorScheme.background,
+                image: const DecorationImage(
+                  image: AssetImage('assets/images/login_pattern.png'),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-          ),
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  backgroundColor: Colors.transparent,
+                  title: Text('Login', style: theme.textTheme.titleLarge),
+                  centerTitle: true,
+                  toolbarHeight: 120,
+                ),
+                body: Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.18,
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Consumer<LoginViewModel>(
+                      builder: (BuildContext context,
+                          LoginViewModel loginViewModel, Widget? child) {
+                        return Form(
+                          key: vm.formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                'Welcome Back!',
+                                style: theme.textTheme.titleLarge!.copyWith(
+                                    color: theme.colorScheme.onSecondary),
+                              ),
+                              const SizedBox(height: 40),
+                              CustomTextFormField(
+                                title: 'Enter your email',
+                                textEditingController: vm.email,
+                                labelText: 'Email',
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'You must enter your e-mail address';
+                                  }
+
+                                  var regex = RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+                                  if (!regex.hasMatch(value)) {
+                                    return 'invalid e-mail address';
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 20),
+                              CustomTextFormField(
+                                title: 'Enter your password',
+                                textEditingController: vm.password,
+                                labelText: 'Password',
+                                obscureText: !isVisible,
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    isVisible = !isVisible;
+                                    setState(() {});
+                                  },
+                                  child: isVisible == true
+                                      ? const Icon(Icons.visibility_off)
+                                      : const Icon(Icons.visibility),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'You must enter your password';
+                                  }
+
+                                  var regex = RegExp(
+                                    r"(?=^.{8,}$)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$",
+                                  );
+
+                                  if (!regex.hasMatch(value)) {
+                                    return 'invalid password';
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: TextButton(
+                                  onPressed: () {},
+                                  child: Text(
+                                    'Forget password ?',
+                                    textAlign: TextAlign.start,
+                                    style: theme.textTheme.bodyLarge!.copyWith(
+                                        color: theme.colorScheme.onSecondary),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 25,
+                              ),
+                              MaterialButton(
+                                onPressed: () async {
+                                  EasyLoading.show();
+                                  await loginViewModel.login();
+                                  EasyLoading.dismiss();
+
+                                  if (vm.loginStatus == "success") {
+                                    SnackBarService.showSuccessMessage(
+                                        'You logged in successfully');
+                                    if (mounted) {
+                                      Navigator.pushReplacementNamed(
+                                          context, HomeLayout.routeName);
+                                    }
+                                  } else if (vm.loginStatus ==
+                                      "invalid-credential") {
+                                    SnackBarService.showErrorMessage(
+                                        'Invalid login credentials');
+                                  } else if (vm.loginStatus ==
+                                      "email-not-verified") {
+                                    SnackBarService.showErrorMessage(
+                                        'Email is not verified, please verify your email');
+                                  } else {
+                                    SnackBarService.showErrorMessage(
+                                        'Something went wrong');
+                                  }
+                                },
+                                height: 50,
+                                color: theme.colorScheme.primary,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Login',
+                                      style: theme.textTheme.bodyLarge!
+                                          .copyWith(
+                                              color:
+                                                  theme.colorScheme.secondary,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                    const Icon(Icons.arrow_forward_rounded)
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(
+                                        context, RegisterView.routeName);
+                                  },
+                                  child: Text(
+                                    'OR Create new account !',
+                                    textAlign: TextAlign.start,
+                                    style: theme.textTheme.bodyLarge!.copyWith(
+                                        color: theme.colorScheme.onSecondary),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
         );
       },
     );
