@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/pages/login_view/reset_password_view.dart';
 import '../../core/services/snackbar_service.dart';
 import '../../core/widgets/custom_text_form_field.dart';
 import '../../layout/home_layout.dart';
 import '../../pages/login_view/login_view_model.dart';
 import '../../pages/register_view/register_view.dart';
+import '../../pages/login_view/reset_password_view.dart';
 
 class LoginView extends StatefulWidget {
   static const String routeName = 'login-view';

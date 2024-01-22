@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
-import 'package:todo/pages/login_view/login_view_model.dart';
 import '../../core/services/snackbar_service.dart';
 import '../../core/widgets/custom_text_form_field.dart';
+import '../../pages/login_view/login_view_model.dart';
 
 class ResetPasswordView extends StatelessWidget {
   static const String routeName = 'reset-password-view';
