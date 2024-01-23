@@ -55,7 +55,6 @@ class FirebaseUtils {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      print(e);
       return e.code;
     }
     return "success";
