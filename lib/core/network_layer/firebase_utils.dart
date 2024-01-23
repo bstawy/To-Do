@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../core/provider/app_provider.dart';
 import '../../core/utils/extract_date.dart';
 import '../../model/task_model.dart';
@@ -24,6 +25,16 @@ class FirebaseUtils {
 
   static verifyEmail() async {
     await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+  }
+
+  static String getCurrentUserEmail() {
+    String email = "";
+    try {
+      email = FirebaseAuth.instance.currentUser!.email!;
+    } on FirebaseAuthException catch (e) {
+      return (e.code);
+    }
+    return email;
   }
 
   static Future<Either<String, UserCredential>> logIn(
