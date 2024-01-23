@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/provider/app_provider.dart';
 import '../../core/services/snackbar_service.dart';
 import '../../pages/login_view/login_view.dart';
 import '../../pages/settings/settings_view_model.dart';
@@ -31,7 +30,6 @@ class _SettingsViewState extends State<SettingsView> {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     var theme = Theme.of(context);
-    var appProvider = Provider.of<AppProvider>(context);
 
     return ChangeNotifierProvider(
       create: (context) => settingsViewModel,
