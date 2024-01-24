@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class SettingsItem extends StatelessWidget {
   final String settingOptionTitle, selectedOption;
-  GestureTapCallback onClicked;
+  final GestureTapCallback onClicked;
 
-  SettingsItem({
+  const SettingsItem({
     super.key,
     required this.settingOptionTitle,
     required this.selectedOption,

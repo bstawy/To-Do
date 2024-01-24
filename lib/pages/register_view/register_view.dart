@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
+
 import '../../core/services/snackbar_service.dart';
 import '../../core/widgets/custom_text_form_field.dart';
 import '../../pages/register_view/register_view_model.dart';
@@ -23,7 +25,7 @@ class _RegisterViewState extends State<RegisterView> {
     super.initState();
     registerViewModel = RegisterViewModel();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -45,7 +47,7 @@ class _RegisterViewState extends State<RegisterView> {
               appBar: AppBar(
                 backgroundColor: Colors.transparent,
                 title:
-                Text('Create Account', style: theme.textTheme.titleLarge),
+                    Text('Create Account', style: theme.textTheme.titleLarge),
                 centerTitle: true,
                 toolbarHeight: 120,
                 iconTheme: IconThemeData(color: theme.colorScheme.secondary),
@@ -127,8 +129,7 @@ class _RegisterViewState extends State<RegisterView> {
                         const SizedBox(height: 20),
                         CustomTextFormField(
                           title: 'Re enter your password',
-                          textEditingController:
-                          vm.confirmPassword,
+                          textEditingController: vm.confirmPassword,
                           labelText: 'Confirm Password',
                           obscureText: !isVisible,
                           suffixIcon: GestureDetector(
@@ -168,12 +169,13 @@ class _RegisterViewState extends State<RegisterView> {
                           onPressed: () async {
                             EasyLoading.show();
                             await vm.register();
-                            if (vm.registrationStatus ==
-                                "success") {
+                            if (vm.registrationStatus == "success") {
                               EasyLoading.dismiss();
-                              SnackBarService.showAlertMessage(
+                              SnackBarService.showSuccessMessage(
                                   'Success, Please verify your account from your Mail Box');
-                              Timer(const Duration(seconds: 3), () {Navigator.pop(context);});
+                              Timer(const Duration(seconds: 3), () {
+                                Navigator.pop(context);
+                              });
                             } else if (vm.registrationStatus ==
                                 "email-already-in-use") {
                               EasyLoading.dismiss();
@@ -226,45 +228,4 @@ class _RegisterViewState extends State<RegisterView> {
       },
     );
   }
-/*
-  register() async {
-    if (formKey.currentState!.validate()) {
-      EasyLoading.show();
-
-      try {
-        // call api to register
-        final userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
-        );
-
-        EasyLoading.dismiss();
-        SnackBarService.showSuccessMessage(
-            'Your account has been created successfully');
-
-        Navigator.pop(context);
-
-      } on FirebaseAuthException catch (e) {
-
-        if (e.code == 'weak-password') {
-
-          EasyLoading.dismiss();
-          SnackBarService.showErrorMessage('The password provided is too weak.');
-          print('The password provided is too weak.');
-
-        } else if (e.code == 'email-already-in-use') {
-
-          EasyLoading.dismiss();
-          print(e.message);
-          SnackBarService.showErrorMessage('The account already exists for that email.');
-          print('The account already exists for that email.');
-
-        }
-      } catch (e) {
-        print(e);
-      }
-    }
-  }
-  */
 }

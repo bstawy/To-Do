@@ -83,8 +83,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                     textEditingController: taskDescriptionController,
                     maxLines: 4,
                     validator: (String? value) {
-                      if (taskDescriptionController.text == null ||
-                          taskDescriptionController.text.trim().isEmpty) {
+                      if (taskDescriptionController.text.trim().isEmpty) {
                         return 'You must provide description';
                       } else if (taskDescriptionController.text.length > 100) {
                         return 'Description must not be more than 100 characters';
@@ -152,7 +151,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                       isDone: false,
                     );
 
-                    await FirebaseUtils.addDataToFirestore(task);
+                    await FirebaseUtils.addTaskToFirestore(task);
 
                     Navigator.pop(context);
                   }
@@ -198,8 +197,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
         timeSelected.hour,
         timeSelected.minute,
       );
-      setState(() {
-      });
+      setState(() {});
     }
   }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+
 import '../../../core/network_layer/firebase_utils.dart';
+import '../../../model/task_model.dart';
 import '../../../pages/home_view/edit_task.dart';
 import '../../../pages/home_view/widgets/done_button.dart';
-import '../../../model/task_model.dart';
 
 class TaskItem extends StatefulWidget {
   final TaskModel task;
@@ -57,7 +58,7 @@ class _TaskItemState extends State<TaskItem> {
           children: [
             SlidableAction(
               onPressed: (context) {
-                FirebaseUtils.deleteDataFromFirestore(widget.task);
+                FirebaseUtils.deleteTaskFromFirestore(widget.task);
               },
               backgroundColor: const Color(0xffEC4B4B),
               foregroundColor: Colors.white,
@@ -99,14 +100,19 @@ class _TaskItemState extends State<TaskItem> {
                       child: Text(
                         widget.task.title,
                         style: widget.task.isDone
-                            ? theme.textTheme.titleMedium!
-                                .copyWith(color: const Color(0xff61E757), overflow: TextOverflow.ellipsis,)
-                            : theme.textTheme.titleMedium!.copyWith(overflow: TextOverflow.ellipsis,),
+                            ? theme.textTheme.titleMedium!.copyWith(
+                                color: const Color(0xff61E757),
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            : theme.textTheme.titleMedium!.copyWith(
+                                overflow: TextOverflow.ellipsis,
+                              ),
                       ),
                     ),
                     const SizedBox(height: 5),
                     Container(
-                      constraints: const BoxConstraints(maxHeight: 24, maxWidth: 195),
+                      constraints:
+                          const BoxConstraints(maxHeight: 24, maxWidth: 195),
                       child: SingleChildScrollView(
                         child: Text(
                           widget.task.description,
