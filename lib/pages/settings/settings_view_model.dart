@@ -5,43 +5,21 @@ import 'package:todo/core/provider/app_provider.dart';
 import 'package:todo/pages/settings/widgets/theme_bottom_sheet.dart';
 
 class SettingsViewModel extends ChangeNotifier {
-  ThemeMode currentTheme = AppProvider.currentTheme!;
   String _currentUserEmail = "";
   String _changePasswordStatus = "";
+  String _deleteAccountStatus = "";
 
   String? get changePasswordStatus => _changePasswordStatus;
 
-  isDarkMode() => currentTheme == ThemeMode.dark;
+  String? get deleteAccountStatus => _deleteAccountStatus;
 
   void showThemeBottomSheet(
-      BuildContext context, SettingsViewModel settingsViewModel) {
+    BuildContext context,
+  ) {
     showModalBottomSheet(
       context: context,
-      builder: (context) =>
-          ThemeBottomSheetWidget(settingsViewModel: settingsViewModel),
+      builder: (context) => const ThemeBottomSheetWidget(),
     );
-  }
-
-  void showChangePasswordBottomSheet(
-      context, SettingsViewModel settingsViewModel) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) =>
-          ThemeBottomSheetWidget(settingsViewModel: settingsViewModel),
-    );
-  }
-
-  addThemeValueToSharedPrefs(bool isDark) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    isDark ? prefs.setBool("isDark", true) : prefs.setBool("isDark", false);
-  }
-
-  changeTheme(ThemeMode newTheme) {
-    if (currentTheme == newTheme) return;
-    currentTheme = newTheme;
-    addThemeValueToSharedPrefs(currentTheme == ThemeMode.dark);
-    AppProvider.currentTheme = currentTheme;
-    notifyListeners();
   }
 
   changePassword() async {
@@ -53,10 +31,29 @@ class SettingsViewModel extends ChangeNotifier {
           await FirebaseUtils.resetPassword(_currentUserEmail);
       if (_changePasswordStatus.isEmpty) _changePasswordStatus = "invalid";
     }
-    return "success";
+    logout();
+    notifyListeners();
   }
 
   getCurrentUserEmail() {
     _currentUserEmail = FirebaseUtils.getCurrentUserEmail();
+  }
+
+  deleteAccount() async {
+    _deleteAccountStatus = await FirebaseUtils.deleteAccount();
+    if (_deleteAccountStatus.isEmpty) {
+      _deleteAccountStatus = "invalid";
+    } else {
+      _deleteAccountStatus = "success";
+      logout();
+    }
+    notifyListeners();
+  }
+
+  logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    AppProvider.userID = "";
+    await FirebaseUtils.logOut();
   }
 }
