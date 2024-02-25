@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo/core/widgets/custom_text_form_field.dart';
-import '../../core/network_layer/firestore_utils.dart';
+
+import '../../core/network_layer/firebase_utils.dart';
+import '../../core/widgets/custom_text_form_field.dart';
 import '../../model/task_model.dart';
 
 class EditTask extends StatefulWidget {
@@ -17,7 +18,7 @@ class _EditTaskState extends State<EditTask> {
   late TextEditingController taskDescriptionController;
   DateTime taskSelectedDate = DateTime.now();
   late DateTime taskSelectedTime;
-  DateTime initDate =  DateTime.now();
+  DateTime initDate = DateTime.now();
   DateTime initTime = DateTime.now();
 
   @override
@@ -46,16 +47,16 @@ class _EditTaskState extends State<EditTask> {
   }
 
   initValues(var args) {
-    if(taskTitleController.text == 'init') {
+    if (taskTitleController.text == 'init') {
       taskTitleController.text = args.title;
     }
-    if(taskDescriptionController.text == 'init') {
+    if (taskDescriptionController.text == 'init') {
       taskDescriptionController.text = args.description;
     }
-    if(taskSelectedDate == initDate) {
+    if (taskSelectedDate == initDate) {
       taskSelectedDate = args.date;
     }
-    if(taskSelectedTime == initTime) {
+    if (taskSelectedTime == initTime) {
       taskSelectedTime = args.time;
     }
   }
@@ -134,8 +135,7 @@ class _EditTaskState extends State<EditTask> {
                         textEditingController: taskDescriptionController,
                         maxLines: 4,
                         validator: (String? value) {
-                          if (taskDescriptionController.text == null ||
-                              taskDescriptionController.text.trim().isEmpty) {
+                          if (taskDescriptionController.text.trim().isEmpty) {
                             return 'You must provide description';
                           } else if (taskDescriptionController.text.length >
                               100) {
@@ -198,15 +198,14 @@ class _EditTaskState extends State<EditTask> {
                               args.description = taskDescriptionController.text;
                               args.date = taskSelectedDate;
                               args.time = taskSelectedTime;
-                              await FirestoreUtils.updateDataOnFirestore(args);
+                              await FirebaseUtils.updateTaskOnFirestore(args);
 
                               Navigator.pop(context);
-                            } else {
-                              print(
-                                  formKey.currentState!.validate().toString());
                             }
                           },
-                          color: args.isDone ? const Color(0xff61E757) : theme.primaryColor,
+                          color: args.isDone
+                              ? const Color(0xff61E757)
+                              : theme.primaryColor,
                           padding: const EdgeInsets.symmetric(
                               vertical: 10, horizontal: 30),
                           shape: RoundedRectangleBorder(

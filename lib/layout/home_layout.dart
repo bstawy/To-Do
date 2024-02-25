@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo/layout/widgets/new_task_bottom_sheet.dart';
-import 'package:todo/pages/home_view/home_view.dart';
-import 'package:todo/pages/settings/settings_view.dart';
+import 'widgets/new_task_bottom_sheet.dart';
+import '../../pages/home_view/home_view.dart';
+import '../../pages/settings/settings_view.dart';
 
 class HomeLayout extends StatefulWidget {
   static const String routeName = 'home-layout-view';

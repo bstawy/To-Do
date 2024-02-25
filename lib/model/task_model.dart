@@ -1,4 +1,4 @@
-import 'package:todo/core/utils/extract_date.dart';
+import '../../core/utils/extract_date.dart';
 
 class TaskModel {
   String? id;
