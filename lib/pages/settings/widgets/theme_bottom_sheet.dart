@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../../core/provider/app_provider.dart';
 import 'selected_option_widget.dart';
 import 'unselected_option_widget.dart';
 
 class ThemeBottomSheetWidget extends StatefulWidget {
-  const ThemeBottomSheetWidget({super.key});
+  const ThemeBottomSheetWidget({
+    super.key,
+  });
 
   @override
   State<ThemeBottomSheetWidget> createState() => _ThemeBottomSheetWidgetState();
@@ -26,7 +29,6 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
             onTap: () {
               appProvider.changeTheme(ThemeMode.light);
               Navigator.pop(context);
-              //appProvider.changeThemeSheetStatus('close');
             },
             child: appProvider.isDarkMode()
                 ? const UnselectedOption(unselectedOptionTitle: 'Light')
@@ -37,11 +39,10 @@ class _ThemeBottomSheetWidgetState extends State<ThemeBottomSheetWidget> {
             onTap: () {
               appProvider.changeTheme(ThemeMode.dark);
               Navigator.pop(context);
-              //appProvider.changeThemeSheetStatus('close');
             },
             child: appProvider.isDarkMode()
                 ? const SelectedOption(selectedOptionTitle: 'Dark')
-                : const UnselectedOption(unselectedOptionTitle: 'Dark')
+                : const UnselectedOption(unselectedOptionTitle: 'Dark'),
           ),
         ],
       ),

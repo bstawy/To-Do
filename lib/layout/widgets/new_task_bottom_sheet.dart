@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:todo/core/network_layer/firestore_utils.dart';
+import 'package:todo/core/network_layer/firebase_utils.dart';
 import 'package:todo/core/widgets/custom_text_form_field.dart';
 import 'package:todo/model/task_model.dart';
 
@@ -29,8 +29,6 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
       TimeOfDay.now().hour,
       TimeOfDay.now().minute,
     );
-    print(taskSelectedDate);
-    print(taskSelectedTime);
     super.initState();
   }
 
@@ -85,8 +83,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                     textEditingController: taskDescriptionController,
                     maxLines: 4,
                     validator: (String? value) {
-                      if (taskDescriptionController.text == null ||
-                          taskDescriptionController.text.trim().isEmpty) {
+                      if (taskDescriptionController.text.trim().isEmpty) {
                         return 'You must provide description';
                       } else if (taskDescriptionController.text.length > 100) {
                         return 'Description must not be more than 100 characters';
@@ -154,11 +151,9 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
                       isDone: false,
                     );
 
-                    await FirestoreUtils.addDataToFirestore(task);
+                    await FirebaseUtils.addTaskToFirestore(task);
 
                     Navigator.pop(context);
-                  } else {
-                    print(formKey.currentState!.validate().toString());
                   }
                 },
                 color: theme.primaryColor,
@@ -202,10 +197,7 @@ class _NewTaskBottomSheetState extends State<NewTaskBottomSheet> {
         timeSelected.hour,
         timeSelected.minute,
       );
-      setState(() {
-        print(taskSelectedDate);
-        print(taskSelectedTime);
-      });
+      setState(() {});
     }
   }
 }

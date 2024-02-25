@@ -6,7 +6,6 @@ class ExtractDate {
       date.month,
       date.day,
     );
-    print("newDate = $newDate");
     return newDate;
   }
 }
