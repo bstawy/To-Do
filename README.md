@@ -37,7 +37,7 @@ To Do application supports Dark mode.
 
 &nbsp;
 
-<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/QuranTab.gif" width="300" /> -->
+<img src="https://github.com/bstawy/To-Do/blob/master/screenshots/home.jpg" width="300" /> 
 
 &nbsp;
 
@@ -48,18 +48,18 @@ To Do application supports Dark mode.
 
 &nbsp;
 
-<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+<img src="https://github.com/bstawy/To-Do/blob/master/screenshots/add_task.jpg" width="300" />
 
 &nbsp;
 
-
+<!--
 &nbsp;
 
 &nbsp; &nbsp; &nbsp; Edit existing task
 
 &nbsp;
 
-<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+ <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" />
 
 &nbsp;
 
@@ -70,7 +70,7 @@ To Do application supports Dark mode.
 
 &nbsp;
 
-<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+ <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> 
 
 &nbsp;
 
@@ -81,20 +81,32 @@ To Do application supports Dark mode.
 
 &nbsp;
 
-<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+ <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" />
 
 &nbsp;
-
+-->
 
 &nbsp;
 
 **Settings page:**
 
+&nbsp; &nbsp; &nbsp; You can change application theme from here or Change password or Delete account.
+
+&nbsp;
+
+<img src="https://github.com/bstawy/To-Do/blob/master/screenshots/settings.jpg" width="300" />
+
+&nbsp;
+
+**Login & Register pages:**
+
 &nbsp; &nbsp; &nbsp; You can change application language and theme from here.
 
 &nbsp;
 
-<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
+<img src="https://github.com/bstawy/To-Do/blob/master/screenshots/login.jpg" width="300" />
+
+<img src="https://github.com/bstawy/To-Do/blob/master/screenshots/register.jpg" width="300" />
 
 &nbsp;
 
@@ -107,20 +119,6 @@ To Do application supports Dark mode.
 
 &nbsp;
 
-<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/HadethTab.gif" width="300" /> -->
-
-&nbsp;
-
-
-&nbsp;
-<!-- 
-**Multi language:**
-
-&nbsp; &nbsp; &nbsp; Application supports English and Arabic languages but only in tabs. Sura verses and hadeth content are in Arabic language.
-
-&nbsp;
--->
-<!-- <img src="https://github.com/bstawy/Islami/blob/master/screenshots/ArabicLanguage.gif" width="300" /> -->
-<!-- ![image](screenshots/QuranTab.gif =250x250) -->
+<img src="https://github.com/bstawy/To-Do/blob/master/screenshots/home_dark.jpg" width="300" />
 
 &nbsp;
